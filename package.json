@@ -1,0 +1,26 @@
+{
+	"name": "dl",
+	"version": "1.0.0",
+	"description": "Downlaoder for YouTube videos",
+	"main": "build/app.js",
+	"author": "zS1L3NT",
+	"scripts": {
+		"start": "node build/app.js",
+		"dev": "ts-node src/app.ts"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"ejs": "^3.1.6",
+		"express": "^4.17.1",
+		"ytdl-core": "^4.4.5"
+	},
+	"engines": {
+		"node": ">=0.12"
+	},
+	"engineStrict": true,
+	"devDependencies": {
+		"@types/cors": "^2.8.10",
+		"@types/express": "^4.17.11",
+		"@types/node": "^14.14.30"
+	}
+}

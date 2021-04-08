@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>YouTube <%= title %> Downloader</title>
+		<style>
+			* {
+				text-align: center;
+			}
+
+			.heading {
+				font-family: Arial;
+				margin-top: 40vh;
+			}
+
+			input,
+			.convert-button {
+				font-size: 1.3em;
+				padding: 5px 10px;
+			}
+
+			input {
+				border-radius: 4px 0px 0px 4px;
+				width: 30em;
+				text-align: center;
+				border: 2px solid #eeeeee;
+				background: #eeeeee;
+				outline: none;
+			}
+
+			input:focus {
+				border: 2px solid #0485ff;
+			}
+
+			.filename {
+				margin-bottom: 10px;
+			}
+
+			.filename::placeholder {
+				text-align: center;
+			}
+
+			.convert-button {
+				border-radius: 0px 4px 4px 0px;
+				border: 2px solid #0485ff;
+				background: #0485ff;
+				color: white;
+			}
+
+			.error {
+				color: red;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 class="heading">YouTube <%= title %> Downloader</h1>
+		<input class="filename" placeholder="<%= title %> filename or leave blank for autofill" />
+		<br>
+		<input
+			class="URL-input"
+			placeholder="<%= title %> URL e.g. https://www.youtube.com/watch?v=nM0xDI5R50E"
+		/>
+		<button class="convert-button">Convert</button>
+		<p class="error"></p>
+		<script>
+			const YTLink = /(https?:\/\/)?(www\.)?youtu(\.be\/\S+|be\.com\/watch\?.*v=\S+)/
+			navigator.clipboard?.readText().then(text => {
+				if (text.match(YTLink))
+					document.querySelector(".URL-input").value = text
+			})
+
+			document
+				.querySelector(".convert-button")
+				.addEventListener("click", () => {
+					const URLinput = document.querySelector(".URL-input").value
+					const filename = document.querySelector(".filename").value
+					const error = document.querySelector(".error")
+					
+					if (!URLinput || !URLinput.match(YTLink)) {
+						error.innerHTML =
+							"Must enter a proper YouTube URL before converting!"
+						return
+					}
+
+					error.innerHTML = ""
+					window.location.href = `/download?URL=${URLinput}&format=<%= format %>&filename=${filename}`
+				})
+		</script>
+	</body>
+</html>
