@@ -12,7 +12,7 @@
 		"cors": "^2.8.5",
 		"ejs": "^3.1.6",
 		"express": "^4.17.1",
-		"ytdl-core": "^4.4.5"
+		"ytdl-core": "^4.5.0"
 	},
 	"engines": {
 		"node": ">=0.12"
