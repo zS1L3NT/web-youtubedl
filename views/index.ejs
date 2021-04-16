@@ -1,91 +1,131 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>YouTube <%= title %> Downloader</title>
-		<style>
-			* {
-				text-align: center;
-			}
-
-			.heading {
-				font-family: Arial;
-				margin-top: 40vh;
-			}
-
-			input,
-			.convert-button {
-				font-size: 1.3em;
-				padding: 5px 10px;
-			}
-
-			input {
-				border-radius: 4px 0px 0px 4px;
-				width: 30em;
-				text-align: center;
-				border: 2px solid #eeeeee;
-				background: #eeeeee;
-				outline: none;
-			}
-
-			input:focus {
-				border: 2px solid #0485ff;
-			}
-
-			.filename {
-				margin-bottom: 10px;
-			}
-
-			.filename::placeholder {
-				text-align: center;
-			}
-
-			.convert-button {
-				border-radius: 0px 4px 4px 0px;
-				border: 2px solid #0485ff;
-				background: #0485ff;
-				color: white;
-			}
-
-			.error {
-				color: red;
-				font-size: 20px;
-			}
-		</style>
+		<link rel="stylesheet" href="./styles.css" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 	</head>
 
 	<body>
-		<h1 class="heading">YouTube <%= title %> Downloader</h1>
-		<input class="filename" placeholder="<%= title %> filename or leave blank for autofill" />
-		<br>
-		<input
-			class="URL-input"
-			placeholder="<%= title %> URL e.g. https://www.youtube.com/watch?v=nM0xDI5R50E"
-		/>
-		<button class="convert-button">Convert</button>
-		<p class="error"></p>
-		<script>
-			const YTLink = /(https?:\/\/)?(www\.)?youtu(\.be\/\S+|be\.com\/watch\?.*v=\S+)/
-			navigator.clipboard?.readText().then(text => {
-				if (text.match(YTLink))
-					document.querySelector(".URL-input").value = text
-			})
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<h1 class="navbar-brand">Youtube Downloader</h1>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<nav class="navbar-nav">
+						<a
+							href="/video"
+							aria-current="page"
+							class="nav-link <%= title === 'Video' ? 'active' : '' %>"
+							>Video</a
+						>
+						<a
+							href="/audio"
+							class="nav-link <%= title === 'Audio' ? 'active' : '' %>"
+							>Audio</a
+						>
+						<a
+							href="/video-pl"
+							class="nav-link disabled <%= title === 'Video Playlist' ? 'active' : '' %>"
+							>Video Playlist</a
+						>
+						<a
+							href="/audio-pl"
+							class="nav-link disabled <%= title === 'Audio Playlist' ? 'active' : '' %>"
+							>Audio Playlist</a
+						>
+					</nav>
+				</div>
+			</div>
+		</nav>
+		<article class="container mt-5">
+			<h1 class="title">YouTube <%= title %> Downloader</h1>
+			<div class="input-group my-3">
+				<span class="input-group-text" id="addon-wrapping">
+					Filename
+				</span>
+				<input
+					class="form-control input-name"
+					placeholder="Leave blank for autofill"
+				/>
+			</div>
+			<div class="input-group my-3">
+				<span class="input-group-text" id="addon-wrapping">
+					Link
+				</span>
+				<input
+					class="form-control input-url"
+					placeholder="e.g. https://www.youtube.com/watch?v=nM0xDI5R50E"
+				/>
+			</div>
 
-			document
-				.querySelector(".convert-button")
-				.addEventListener("click", () => {
-					const URLinput = document.querySelector(".URL-input").value
-					const filename = document.querySelector(".filename").value
-					const error = document.querySelector(".error")
-					
-					if (!URLinput || !URLinput.match(YTLink)) {
-						error.innerHTML =
-							"Must enter a proper YouTube URL before converting!"
-						return
-					}
+			<div class="position-fixed bottom-0 start-0 p-3" style="z-index: 5">
+				<div
+					class="toast hide toast-clipboard"
+					role="alert"
+					aria-live="assertive"
+					aria-atomic="true"
+				>
+					<div class="toast-header">
+						<strong class="me-auto">Clipboard notice</strong>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="toast"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="toast-body">
+						We copied the most recent text from your clipboard to
+						the URL bar! <span class="undo-clipboard">Click here to undo</span>
+					</div>
+				</div>
+			</div>
 
-					error.innerHTML = ""
-					window.location.href = `/download?URL=${URLinput}&format=<%= format %>&filename=${filename}`
-				})
-		</script>
+			<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+				<div
+					class="toast hide toast-error"
+					role="alert"
+					aria-live="assertive"
+					aria-atomic="true"
+				>
+					<div class="toast-header">
+						<strong class="me-auto">Error</strong>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="toast"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="toast-body toast-error-body"></div>
+				</div>
+			</div>
+
+			<button class="btn btn-primary btn-convert" onclick="convert_filter('<%= title %>')">
+				<span
+					class="spinner-border spinner-border-sm spinner d-none"
+					role="status"
+					aria-hidden="true"
+				></span>
+				Convert
+			</button>
+		</article>
+		<script src="./script.js"></script>
 	</body>
 </html>
