@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import ytdl from "ytdl-core"
+import ytpl from "ytpl"
 import path from "path"
 
 const app = express()
@@ -20,36 +21,48 @@ app.get("/audio", (_req, res) => {
 	res.render("index", { title: "Audio", format: "audioonly" })
 })
 
-app.post("/verify_video", async (req, res) => {
-	let { url, format, name } = req.body as {
-		url: string
-		format: "videoandaudio" | "audioonly"
+app.get("/video-pl", (_req, res) => {
+	res.render("index", { title: "Video Playlist", format: "videoandaudio" })
+})
+
+app.get("/audio-pl", (_req, res) => {
+	res.render("index", { title: "Audio Playlist", format: "audioonly" })
+})
+
+app.post("/verify_name", (req, res) => {
+	let { name } = req.body as {
 		name: string
 	}
 
 	try {
-		if (!name) {
-			const info = await ytdl.getInfo(url)
-			name = info.videoDetails.title
-		}
+		res.setHeader(
+			"Content-Disposition",
+			`attachment; filename="${name}.mp3"`
+		)
+		res.status(200).end()
+	} catch (e) {
+		res.status(400).send("Filename contains invalid characters")
+	}
+})
+
+app.post("/verify_video", async (req, res) => {
+	const { url, format } = req.body as {
+		url: string
+		format: "videoandaudio" | "audioonly"
+	}
+
+	let name = ""
+	let thumbnail = ""
+	try {
+		const info = await ytdl.getInfo(url)
+		name = info.videoDetails.title
+
+		const thumbnails = info.videoDetails.thumbnails
+		thumbnail = thumbnails[thumbnails.length - 1].url
 	} catch (e) {
 		res.status(400).send(
 			"Error getting video title, please enter a proper YouTube URL"
 		)
-		return
-	}
-
-	const header = `attachment; filename="${name}.${
-		format === "audioonly" ? "mp3" : "mp4"
-	}"`
-	try {
-		res.header("Content-Disposition", header)
-	} catch (e) {
-		if (name) res.status(400).send("Filename contains invalid characters")
-		else
-			res.status(400).send(
-				"Filename contains invalid characters, please type a filename"
-			)
 		return
 	}
 
@@ -58,10 +71,26 @@ app.post("/verify_video", async (req, res) => {
 			filter: format,
 			quality: "highest"
 		}).pipe(res)
-		res.end()
+		res.status(200).send({ name, thumbnail })
 	} catch (err) {
 		res.status(400).send(err.message)
 		return
+	}
+})
+
+app.post("/verify_playlist", async (req, res) => {
+	const { url } = req.body as { url: string }
+
+	if (!url) {
+		res.status(400).send("No URL provided!")
+		return
+	}
+
+	try {
+		const { items } = await ytpl(url)
+		res.status(200).send(items.map(item => item.url))
+	} catch (e) {
+		res.status(400).send("URL provided is not a YouTube Playlist link!")
 	}
 })
 

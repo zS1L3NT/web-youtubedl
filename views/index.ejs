@@ -9,12 +9,13 @@
 			rel="stylesheet"
 		/>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 	</head>
 
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
-				<h1 class="navbar-brand">Youtube Downloader</h1>
+				<h1 class="navbar-brand my-0">Youtube Downloader</h1>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -41,38 +42,69 @@
 						>
 						<a
 							href="/video-pl"
-							class="nav-link disabled <%= title === 'Video Playlist' ? 'active' : '' %>"
+							class="nav-link <%= title === 'Video Playlist' ? 'active' : '' %>"
 							>Video Playlist</a
 						>
 						<a
 							href="/audio-pl"
-							class="nav-link disabled <%= title === 'Audio Playlist' ? 'active' : '' %>"
+							class="nav-link <%= title === 'Audio Playlist' ? 'active' : '' %>"
 							>Audio Playlist</a
 						>
 					</nav>
 				</div>
 			</div>
 		</nav>
-		<article class="container mt-5">
+		<article id="app" class="container mt-5">
 			<h1 class="title">YouTube <%= title %> Downloader</h1>
 			<div class="input-group my-3">
-				<span class="input-group-text" id="addon-wrapping">
-					Filename
-				</span>
+				<span class="input-group-text" id="addon-wrapping"> Link </span>
 				<input
-					class="form-control input-name"
-					placeholder="Leave blank for autofill"
-				/>
-			</div>
-			<div class="input-group my-3">
-				<span class="input-group-text" id="addon-wrapping">
-					Link
-				</span>
-				<input
+					v-model="url"
 					class="form-control input-url"
 					placeholder="e.g. https://www.youtube.com/watch?v=nM0xDI5R50E"
 				/>
 			</div>
+
+			<button
+				class="btn btn-primary btn-convert"
+				:disabled="!spinner_class"
+				@click="convert_filter('<%= title %>')"
+			>
+				<span
+					:class="'spinner-border spinner-border-sm ' + spinner_class"
+					role="status"
+					aria-hidden="true"
+				></span>
+				Convert
+			</button>
+
+			<section v-for="(file, i) in files" class="mt-3 p-3 bg-light">
+				<img class="w-100" :src="file.thumbnail" alt="" />
+				<div class="input-group my-3">
+					<span class="input-group-text" id="addon-wrapping">
+						Filename
+					</span>
+					<input
+						v-model="files[i].name"
+						class="form-control input-name"
+					/>
+				</div>
+				<button
+					class="btn btn-success"
+					:disabled="!files[i].spinner_class"
+					@click="download_one(i, '<%= format %>')"
+				>
+					<span
+						:class="'spinner-border spinner-border-sm ' + files[i].spinner_class"
+						role="status"
+						aria-hidden="true"
+					></span>
+					Download!
+				</button>
+				<button class="btn btn-danger" @click="remove_one(i)">
+					Remove
+				</button>
+			</section>
 
 			<div class="position-fixed bottom-0 start-0 p-3" style="z-index: 5">
 				<div
@@ -92,7 +124,10 @@
 					</div>
 					<div class="toast-body">
 						We copied the most recent text from your clipboard to
-						the URL bar! <span class="undo-clipboard">Click here to undo</span>
+						the URL bar!
+						<span class="undo-clipboard" @click="undo_clipboard()"
+							>Click here to undo</span
+						>
 					</div>
 				</div>
 			</div>
@@ -105,7 +140,7 @@
 					aria-atomic="true"
 				>
 					<div class="toast-header">
-						<strong class="me-auto">Error</strong>
+						<strong class="me-auto text-danger">Error</strong>
 						<button
 							type="button"
 							class="btn-close"
@@ -113,18 +148,11 @@
 							aria-label="Close"
 						></button>
 					</div>
-					<div class="toast-body toast-error-body"></div>
+					<div class="toast-body">
+						{{ error_message }}
+					</div>
 				</div>
 			</div>
-
-			<button class="btn btn-primary btn-convert" onclick="convert_filter('<%= title %>')">
-				<span
-					class="spinner-border spinner-border-sm spinner d-none"
-					role="status"
-					aria-hidden="true"
-				></span>
-				Convert
-			</button>
 		</article>
 		<script src="./script.js"></script>
 	</body>

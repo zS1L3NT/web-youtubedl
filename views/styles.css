@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
 	width: 100%;
@@ -17,4 +21,10 @@ body {
 .undo-clipboard {
 	cursor: pointer !important;
 	color: darkred;
+}
+
+@media only screen and (min-width: 768px) {
+	.container {
+		max-width: 60% !important;
+	}
 }
