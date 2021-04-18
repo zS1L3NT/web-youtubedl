@@ -3,9 +3,21 @@ import cors from "cors"
 import ytdl from "ytdl-core"
 import ytpl from "ytpl"
 import path from "path"
+import archiver from "archiver"
+import { v4 } from "uuid"
 
 const app = express()
 const PORT = 1902
+
+const cache: {
+	[id: string]: {
+		files: {
+			url: string
+			name: string
+		}[]
+		format: "videoandaudio" | "audioonly"
+	}
+} = {}
 
 app.use(cors())
 app.use(express.json())
@@ -94,7 +106,75 @@ app.post("/verify_playlist", async (req, res) => {
 	}
 })
 
-app.get("/download", (req, res) => {
+app.post("/cache_zip", async (req, res) => {
+	const { files, format } = req.body as {
+		files: {
+			url: string
+			name: string
+		}[]
+		format: "videoandaudio" | "audioonly"
+	}
+
+	if (files.length < 1) {
+		res.status(400).send("Cannot download 0 files")
+		return
+	}
+
+	const id = v4()
+	cache[id] = {
+		files,
+		format
+	}
+
+	setTimeout(() => {
+		delete cache[id]
+	}, 3600000)
+
+	res.status(200).send(id)
+})
+
+app.get("/download_cache", (req, res) => {
+	const { id } = req.query as { id: string }
+
+	const data = cache[id]
+	if (!data) {
+		res.status(404).send("Data expired or was never created")
+		return
+	}
+
+	const archive = archiver("zip", { zlib: { level: 9 } })
+	archive.on("error", err => {
+		res.status(500).send({ error: err.message })
+	})
+
+	res.attachment("music-files.zip")
+	archive.pipe(res)
+
+	for (let i = 0, il = data.files.length; i < il; i++) {
+		const { url, name } = data.files[i]
+
+		const filename =
+			name.replace(/[\\\/]/g, " ") +
+			(data.format === "audioonly" ? ".mp3" : ".mp4")
+
+		try {
+			archive.append(
+				ytdl(url, {
+					filter: data.format,
+					quality: "highest"
+				}),
+				{ name: filename }
+			)
+		} catch (e) {
+			console.trace(e.message)
+			return
+		}
+	}
+
+	archive.finalize()
+})
+
+app.get("/download_file", (req, res) => {
 	const { url, format, name } = req.query as {
 		url: string
 		format: "videoandaudio" | "audioonly"
@@ -102,7 +182,7 @@ app.get("/download", (req, res) => {
 	}
 
 	if (!url || !format || !name) {
-		res.redirect("/video")
+		res.status(400).send("Missing items in URL")
 	}
 
 	try {
@@ -118,7 +198,7 @@ app.get("/download", (req, res) => {
 		}).pipe(res)
 	} catch (e) {
 		console.log("Caught error:", e.message)
-		res.redirect("/video")
+		res.status(400).send(e.message)
 	}
 })
 

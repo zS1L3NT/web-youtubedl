@@ -2,7 +2,8 @@ const app = new Vue({
 	el: "#app",
 	data: {
 		url: "",
-		spinner_class: "d-none",
+		convert_spinner_class: "d-none",
+		zip_spinner_class: "d-none",
 		error_message: "",
 		files: []
 	},
@@ -13,10 +14,14 @@ const app = new Vue({
 		convert_filter: function (title) {
 			switch (title) {
 				case "Video":
-					this.convert_one("videoandaudio", this.url)
+					this.convert_one("videoandaudio", this.url).then(() => {
+						this.convert_spinner_class = "d-none"
+					})
 					break
 				case "Audio":
-					this.convert_one("audioonly", this.url)
+					this.convert_one("audioonly", this.url).then(() => {
+						this.convert_spinner_class = "d-none"
+					})
 					break
 				case "Video Playlist":
 					this.convert_playlist("videoandaudio")
@@ -38,7 +43,7 @@ const app = new Vue({
 				}
 
 				error_toast.hide()
-				this.spinner_class = ""
+				this.convert_spinner_class = ""
 
 				const xhr = new XMLHttpRequest()
 				xhr.open("POST", "/verify_video", true)
@@ -50,9 +55,8 @@ const app = new Vue({
 					})
 				)
 				xhr.onload = () => {
-					this.spinner_class = "d-none"
-
 					if (xhr.status === 400) {
+						this.convert_spinner_class = "d-none"
 						this.error_message = xhr.responseText
 						error_toast.show()
 						rej()
@@ -78,7 +82,7 @@ const app = new Vue({
 			}
 
 			error_toast.hide()
-			this.spinner_class = ""
+			this.convert_spinner_class = ""
 
 			const xhr = new XMLHttpRequest()
 			xhr.open("POST", "/verify_playlist", true)
@@ -86,7 +90,7 @@ const app = new Vue({
 			xhr.send(JSON.stringify({ url: this.url }))
 			xhr.onload = () => {
 				if (xhr.status === 400) {
-					this.spinner_class = "d-none"
+					this.convert_spinner_class = "d-none"
 					this.error_message = xhr.responseText
 					error_toast.show()
 				} else {
@@ -96,9 +100,34 @@ const app = new Vue({
 					)
 					Promise.all(conversions)
 						.then(() => {
-							this.spinner_class = "d-none"
+							this.convert_spinner_class = "d-none"
 						})
 						.catch(() => {})
+				}
+			}
+		},
+		download_all: function (format) {
+			this.zip_spinner_class = ""
+
+			const xhr = new XMLHttpRequest()
+			xhr.open("POST", "/cache_zip", true)
+			xhr.setRequestHeader("Content-Type", "application/json")
+			xhr.send(
+				JSON.stringify({
+					files: this.files.map(file => ({
+						name: file.name,
+						url: file.url
+					})),
+					format
+				})
+			)
+			xhr.onload = () => {
+				this.zip_spinner_class = "d-none"
+				if (xhr.status === 400) {
+					this.error_message = xhr.responseText
+					error_toast.show()
+				} else {
+					window.location.href = `/download_cache?id=${xhr.responseText}`
 				}
 			}
 		},
@@ -117,7 +146,7 @@ const app = new Vue({
 					this.error_message = xhr.responseText
 					error_toast.show()
 				} else {
-					window.location.href = `/download?url=${encodeURI(
+					window.location.href = `/download_file?url=${encodeURI(
 						url
 					)}&format=${format}&name=${encodeURI(name)}`
 				}

@@ -67,15 +67,29 @@
 
 			<button
 				class="btn btn-primary btn-convert"
-				:disabled="!spinner_class"
+				:disabled="!convert_spinner_class"
 				@click="convert_filter('<%= title %>')"
 			>
 				<span
-					:class="'spinner-border spinner-border-sm ' + spinner_class"
+					:class="'spinner-border spinner-border-sm ' + convert_spinner_class"
 					role="status"
 					aria-hidden="true"
 				></span>
 				Convert
+			</button>
+
+			<button
+				v-if="files.length > 0"
+				class="btn btn-success btn-convert mt-2"
+				:disabled="!zip_spinner_class"
+				@click="download_all('<%= format %>')"
+			>
+				<span
+					:class="'spinner-border spinner-border-sm ' + zip_spinner_class"
+					role="status"
+					aria-hidden="true"
+				></span>
+				Download all to ZIP
 			</button>
 
 			<section v-for="(file, i) in files" class="mt-3 p-3 bg-light">
@@ -99,7 +113,7 @@
 						role="status"
 						aria-hidden="true"
 					></span>
-					Download!
+					Download MP3
 				</button>
 				<button class="btn btn-danger" @click="remove_one(i)">
 					Remove
