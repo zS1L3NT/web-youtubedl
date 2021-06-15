@@ -1,21 +1,22 @@
 {
-	"name": "dl",
+	"name": "web-vue-dl",
 	"version": "1.0.0",
 	"description": "Downlaoder for YouTube videos",
 	"main": "build/app.js",
 	"author": "zS1L3NT",
 	"scripts": {
-		"start": "node build/app.js",
-		"dev": "ts-node src/app.ts"
+		"start": "node build/app.js"
 	},
 	"dependencies": {
+		"@ffmpeg-installer/ffmpeg": "^1.0.20",
 		"archiver": "^5.3.0",
 		"cors": "^2.8.5",
 		"ejs": "^3.1.6",
 		"express": "^4.17.1",
+		"fluent-ffmpeg": "^2.1.2",
 		"uuid": "^8.3.2",
-		"ytdl-core": "^4.5.0",
-		"ytpl": "^2.1.1"
+		"ytdl-core": "^4.8.2",
+		"ytpl": "^2.2.1"
 	},
 	"engines": {
 		"node": ">=0.12"
@@ -25,7 +26,10 @@
 		"@types/archiver": "^5.1.0",
 		"@types/cors": "^2.8.10",
 		"@types/express": "^4.17.11",
+		"@types/fluent-ffmpeg": "^2.1.17",
 		"@types/node": "^14.14.30",
-		"@types/uuid": "^8.3.0"
+		"@types/uuid": "^8.3.0",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.2.4"
 	}
 }

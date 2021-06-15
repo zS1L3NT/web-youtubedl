@@ -14,27 +14,27 @@ const app = new Vue({
 		convert_filter: function (title) {
 			switch (title) {
 				case "Video":
-					this.convert_one("videoandaudio", this.url).then(() => {
+					this.convert_single(this.url).then(() => {
 						this.convert_spinner_class = "d-none"
 					})
 					break
-				case "Audio":
-					this.convert_one("audioonly", this.url).then(() => {
+				case "Audio (MP3)":
+					this.convert_single(this.url).then(() => {
 						this.convert_spinner_class = "d-none"
 					})
 					break
 				case "Video Playlist":
-					this.convert_playlist("videoandaudio")
+					this.convert_playlist()
 					break
-				case "Audio Playlist":
-					this.convert_playlist("audioonly")
+				case "Audio (WEBM) Playlist":
+					this.convert_playlist()
 					break
 				default:
 					break
 			}
 		},
-		convert_one: function (format, url) {
-			return new Promise((res, rej) => {
+		convert_single: function (url) {
+			return new Promise((resolve, reject) => {
 				if (!url) {
 					this.error_message = "Must enter a YouTube URL!"
 					error_toast.show()
@@ -45,36 +45,29 @@ const app = new Vue({
 				error_toast.hide()
 				this.convert_spinner_class = ""
 
-				const xhr = new XMLHttpRequest()
-				xhr.open("POST", "/verify_video", true)
-				xhr.setRequestHeader("Content-Type", "application/json")
-				xhr.send(
-					JSON.stringify({
-						url,
-						format
-					})
-				)
-				xhr.onload = () => {
-					if (xhr.status === 400) {
-						this.convert_spinner_class = "d-none"
-						this.error_message = xhr.responseText
-						error_toast.show()
-						rej()
-					} else {
-						const { name, thumbnail } = JSON.parse(xhr.responseText)
+				axios
+					.post("/verify_single", { url })
+					.then(res => {
+						const { name, thumbnail, bitrate } = res.data
 						this.files.push({
 							name,
 							url,
 							thumbnail,
+							bitrate,
 							spinner_class: "d-none"
 						})
 						this.url = ""
-						res()
-					}
-				}
+						resolve()
+					})
+					.catch(err => {
+						this.convert_spinner_class = "d-none"
+						this.error_message = err.response.data
+						error_toast.show()
+						reject()
+					})
 			})
 		},
-		convert_playlist: async function (format) {
+		convert_playlist: async function () {
 			if (!this.url) {
 				this.error_message = "Must enter a YouTube URL!"
 				error_toast.show()
@@ -84,73 +77,67 @@ const app = new Vue({
 			error_toast.hide()
 			this.convert_spinner_class = ""
 
-			const xhr = new XMLHttpRequest()
-			xhr.open("POST", "/verify_playlist", true)
-			xhr.setRequestHeader("Content-Type", "application/json")
-			xhr.send(JSON.stringify({ url: this.url }))
-			xhr.onload = () => {
-				if (xhr.status === 400) {
-					this.convert_spinner_class = "d-none"
-					this.error_message = xhr.responseText
-					error_toast.show()
-				} else {
-					const videos = JSON.parse(xhr.responseText)
+			axios
+				.post("/verify_playlist", {url: this.url})
+				.then(res => {
+					const videos = res.data
 					const conversions = videos.map(video =>
-						this.convert_one(format, video)
+						this.convert_single(video)
 					)
-					Promise.all(conversions)
-						.then(() => {
-							this.convert_spinner_class = "d-none"
-						})
-						.catch(() => {})
-				}
-			}
+					Promise.allSettled(conversions).then(() => {
+						this.convert_spinner_class = "d-none"
+					})
+				})
+				.catch(err => {
+					this.convert_spinner_class = "d-none"
+					this.error_message = err.response.data
+					error_toast.show()
+				})
 		},
 		download_all: function (format) {
 			this.zip_spinner_class = ""
 
-			const xhr = new XMLHttpRequest()
-			xhr.open("POST", "/cache_zip", true)
-			xhr.setRequestHeader("Content-Type", "application/json")
-			xhr.send(
-				JSON.stringify({
+			axios
+				.post("/cache_playlist_data", {
 					files: this.files.map(file => ({
 						name: file.name,
 						url: file.url
 					})),
 					format
 				})
-			)
-			xhr.onload = () => {
-				this.zip_spinner_class = "d-none"
-				if (xhr.status === 400) {
-					this.error_message = xhr.responseText
+				.then(res => {
+					this.zip_spinner_class = "d-none"
+					window.location.href = `/download_playlist?id=${res.data}`
+				})
+				.catch(err => {
+					this.zip_spinner_class = "d-none"
+					this.error_message = err.response.data
 					error_toast.show()
-				} else {
-					window.location.href = `/download_cache?id=${xhr.responseText}`
-				}
-			}
+				})
 		},
 		download_one: function (i, format) {
-			const { name, url } = this.files[i]
+			const { name, url, bitrate } = this.files[i]
 
 			this.files[i].spinner_class = ""
 
-			const xhr = new XMLHttpRequest()
-			xhr.open("POST", "/verify_name", true)
-			xhr.setRequestHeader("Content-Type", "application/json")
-			xhr.send(JSON.stringify({ name }))
-			xhr.onload = () => {
-				this.files[i].spinner_class = "d-none"
-				if (xhr.status === 400) {
-					this.error_message = xhr.responseText
+			axios
+				.post("/verify_name", { name })
+				.then(() => {
+					this.files[i].spinner_class = "d-none"
+					window.location.href =
+						`/download_single?` +
+						this.createGetParams({
+							url,
+							format,
+							name,
+							bitrate
+						})
+				})
+				.catch(err => {
+					this.files[i].spinner_class = "d-none"
+					this.error_message = err.response.data
 					error_toast.show()
-				} else {
-					window.location.href = `/download_file?url=${encodeURI(
-						url
-					)}&format=${format}&name=${encodeURI(name)}`
-				}
-			}
+				})
 		},
 		remove_one: function (i) {
 			this.files.splice(i, 1)
@@ -164,6 +151,14 @@ const app = new Vue({
 		undo_clipboard: function () {
 			this.url = ""
 			clipboard_toast.hide()
+		},
+		createGetParams: function (data) {
+			const ret = []
+			for (let d in data)
+				ret.push(
+					encodeURIComponent(d) + "=" + encodeURIComponent(data[d])
+				)
+			return ret.join("&")
 		}
 	}
 })
