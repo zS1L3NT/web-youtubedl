@@ -46,17 +46,19 @@ app.prepare().then(() => {
 
 		if (format === "videoandaudio") {
 			stream.pipe(res).on("error", err => {
-				console.error(err.message)
+				console.error("Video: ", err.message)
 			})
 		} else {
 			ffmpeg(stream)
 				.audioBitrate(bitrate)
 				.withAudioCodec("libmp3lame")
 				.toFormat("mp3")
-				.pipe(res)
 				.on("error", err => {
-					console.error(err.message)
+					if (err.message !== "Output stream closed") {
+						console.error("Audio: ", err.message)
+					}
 				})
+				.pipe(res)
 		}
 	})
 
