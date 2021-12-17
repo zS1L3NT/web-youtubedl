@@ -15,7 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => (
 			<meta property="og:url" content="http://youtubedl.zectan.com/" />
 			<meta property="og:title" content="YouTube DL" />
 			<meta property="og:description" content="Download Audio or Videos from YouTube" />
-			<meta property="og:image" content="http://youtubedl.zectan.com/favicon.svg" />
+			<meta property="og:image" content="http://youtubedl.zectan.com/favicon.png" />
 		</Head>
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
