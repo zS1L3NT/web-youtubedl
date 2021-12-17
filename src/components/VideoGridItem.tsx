@@ -81,7 +81,7 @@ const VideoGridItem = (props: Props): JSX.Element => {
 				</Card>
 			</Grid>
 			<Dialog open={dialogOpen} onClose={handleDialogClose}>
-				<DialogTitle>Download MP3</DialogTitle>
+				<DialogTitle>Download MP{format === "audioonly" ? 3 : 4}</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						Make sure the filename you type in here has no invalid characters
