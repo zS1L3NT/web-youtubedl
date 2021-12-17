@@ -93,7 +93,11 @@ const VideoGridItem = (props: Props): JSX.Element => {
 						fullWidth
 						variant="standard"
 						InputProps={{
-							endAdornment: <InputAdornment position="end">.mp3</InputAdornment>
+							endAdornment: (
+								<InputAdornment position="end">
+									.mp{format === "audioonly" ? 3 : 4}
+								</InputAdornment>
+							)
 						}}
 						value={filename}
 						onChange={handleFilenameChange}
