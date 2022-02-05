@@ -1,6 +1,6 @@
 # YouTube DL
 
-![License](https://img.shields.io/github/license/zS1L3NT/.github?style=for-the-badge) ![Languages](https://img.shields.io/github/languages/count/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Top Language](https://img.shields.io/github/languages/top/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Commit Activity](https://img.shields.io/github/commit-activity/y/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Last commit](https://img.shields.io/github/last-commit/zS1L3NT/web-next-youtubedl?style=for-the-badge)
+![License](https://img.shields.io/github/license/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Languages](https://img.shields.io/github/languages/count/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Top Language](https://img.shields.io/github/languages/top/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Commit Activity](https://img.shields.io/github/commit-activity/y/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Last commit](https://img.shields.io/github/last-commit/zS1L3NT/web-next-youtubedl?style=for-the-badge)
 
 YouTube downloading website available [here](https://youtubedl.zectan.com/).
 You can choose the download type (Audio or Video), paste the link and click Convert to fetch information about a video.
