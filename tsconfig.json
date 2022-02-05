@@ -1,29 +1,42 @@
 {
 	"compilerOptions": {
+		/** Transpiler */
 		"target": "esnext",
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"module": "CommonJS",
+		"lib": ["dom", "dom.iterable", "esnext"], // "esnext"
+		"module": "commonjs", // esnext
 		"moduleResolution": "node",
 		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+
+		/** Project */
+		// "rootDir": "src",
+		"outDir": "dist",
+		"typeRoots": ["./node_modules/@types", "./src/@types"],
+
+		/** Type Checking */
 		"strict": true,
-		"alwaysStrict": true,
-		"noImplicitAny": true,
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		"resolveJsonModule": true,
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
-		"outDir": "build",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"useUnknownInCatchVariables": true,
+		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
-		"isolatedModules": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"allowUnusedLabels": true,
+		"resolveJsonModule": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/** Other */
 		"noEmit": true,
+		"allowJs": true,
 		"jsx": "preserve",
+		"skipLibCheck": true,
+		"isolatedModules": true,
 		"incremental": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app.ts"],
+	"include": ["src", "next-env.d.ts"],
 	"exclude": ["node_modules"]
 }
