@@ -44,8 +44,6 @@ $ npm run dev
     -   [![react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react?style=flat-square)](https://npmjs.com/package/react)
     -   [![react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react-dom?style=flat-square)](https://npmjs.com/package/react-dom)
     -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)
-    -   [![eslint](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/eslint?style=flat-square)](https://npmjs.com/package/eslint)
-    -   [![eslint-config-next](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/eslint-config-next?style=flat-square)](https://npmjs.com/package/eslint-config-next)
 -   MUI
     -   [![@mui/material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/material?style=flat-square)](https://npmjs.com/package/@mui/material)
     -   [![@mui/icons-material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/icons-material?style=flat-square)](https://npmjs.com/package/@mui/icons-material)
