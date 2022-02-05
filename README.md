@@ -34,11 +34,11 @@ $ npm run dev
 ## Built with
 
 -   TypeScript
-    -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
     -   [![@types/express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/express?style=flat-square)](https://npmjs.com/package/@types/express)
     -   [![@types/fluent-fluent](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-fluent)
     -   [![@types/node](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/node?style=flat-square)](https://npmjs.com/package/@types/node)
     -   [![@types/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/react?style=flat-square)](https://npmjs.com/package/@types/react)
+    -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
 -   NextJS with an Express Server
     -   [![next](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/next?style=flat-square)](https://npmjs.com/package/next)
     -   [![react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react?style=flat-square)](https://npmjs.com/package/react)
