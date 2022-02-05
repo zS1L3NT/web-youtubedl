@@ -13,6 +13,7 @@ Working YouTube downloaders without ads are becoming rarer nowadays because of c
 ## Features
 
 -   Download Audio or Video from YouTube
+-   Progressive Web Application
 -   Mobile Responsive website
 
 ## Usage
@@ -41,6 +42,7 @@ $ npm run dev
     -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
 -   NextJS with an Express Server
     -   [![next](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/next?style=flat-square)](https://npmjs.com/package/next)
+    -   [![next-pwa](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/next-pwa?style=flat-square)](https://npmjs.com/package/next-pwa)
     -   [![react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react?style=flat-square)](https://npmjs.com/package/react)
     -   [![react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react-dom?style=flat-square)](https://npmjs.com/package/react-dom)
     -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)

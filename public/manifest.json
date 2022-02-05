@@ -1,0 +1,27 @@
+{
+	"name": "YouTube DL",
+	"short_name": "YouTube DL",
+	"icons": [
+		{
+			"src": "favicon.ico",
+			"sizes": "256x256",
+			"type": "image/x-icon",
+			"purpose": "any"
+		},
+		{
+			"src": "favicon.ico",
+			"sizes": "256x256",
+			"type": "image/x-icon",
+			"purpose": "maskable"
+		},
+		{
+			"src": "favicon.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#e72c3a",
+	"background_color": "#eeeeee"
+}
