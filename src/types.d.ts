@@ -5,3 +5,9 @@ type iVideo = {
 	thumbnail: string
 	bitrate: number
 }
+
+type iSearch = {
+	url: string
+	format: "audioonly" | "videoandaudio"
+	time: number
+}

@@ -1,5 +1,6 @@
 import axios from "axios"
-import React, { Dispatch, SetStateAction, useState } from "react"
+import ErrorDialogContext from "../contexts/ErrorDialogContext"
+import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react"
 import {
 	Alert,
 	Button,
@@ -14,46 +15,66 @@ import {
 	DialogTitle,
 	Grid,
 	InputAdornment,
+	Skeleton,
 	TextField
 } from "@mui/material"
 import { useRouter } from "next/router"
 
 interface Props {
-	video: iVideo
-	setVideos: Dispatch<SetStateAction<iVideo[]>>
+	search: iSearch
+	setSearches: Dispatch<SetStateAction<iSearch[]>>
 }
 
 const VideoGridItem = (props: Props): JSX.Element => {
-	const {
-		video: { id, name, format, thumbnail, bitrate },
-		setVideos
-	} = props
+	const { search, setSearches } = props
 
-	//#region Hooks
+	const { setIsOpen, setText } = useContext(ErrorDialogContext)
 	const router = useRouter()
 	const [dialogOpen, setDialogOpen] = useState(false)
 	const [errorText, setErrorText] = useState<string | null>(null)
-	const [filename, setFilename] = useState(name)
-	//#endregion
+	const [filename, setFilename] = useState<string>("")
+	const [video, setVideo] = useState<iVideo | null>(null)
+	const [controller] = useState(new AbortController())
 
-	//#region Functions
+	useEffect(() => {
+		axios
+			.post(`/api/validate/video-id`, { url: search.url }, { signal: controller.signal })
+			.then(res => {
+				setVideo({
+					...res.data,
+					format: search.format
+				})
+			})
+			.catch(err => {
+				if (!controller.signal.aborted) {
+					setIsOpen(true)
+					setText(err.response?.data?.message || err.message)
+				}
+			})
+		return () => {
+			controller.abort()
+		}
+	}, [])
+
 	const handleRemove = () => {
-		setVideos(videos => [...videos].filter((_, i) => videos.findIndex(v => v.id === id) !== i))
+		setSearches(searches => searches.filter(s => s.time !== search.time))
 		setDialogOpen(false)
 	}
 
 	const handleDownload = () => {
-		axios
-			.post(`/api/validate/filename`, { filename })
-			.then(() => {
-				const url = new URL(`${window.location.origin}/api/download`)
-				url.searchParams.set("url", `https://youtu.be/${id}`)
-				url.searchParams.set("format", format)
-				url.searchParams.set("name", filename)
-				url.searchParams.set("bitrate", `${bitrate}`)
-				router.push(url)
-			})
-			.catch(err => setErrorText(err.response?.data?.message || err.message))
+		if (video) {
+			axios
+				.post(`/api/validate/filename`, { filename })
+				.then(() => {
+					const url = new URL(`${window.location.origin}/api/download`)
+					url.searchParams.set("url", `https://youtu.be/${video.id}`)
+					url.searchParams.set("format", video.format)
+					url.searchParams.set("name", filename)
+					url.searchParams.set("bitrate", `${video.bitrate}`)
+					router.push(url)
+				})
+				.catch(err => setErrorText(err.response?.data?.message || err.message))
+		}
 	}
 
 	const handleFilenameChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -65,7 +86,6 @@ const VideoGridItem = (props: Props): JSX.Element => {
 		setDialogOpen(false)
 		setErrorText(null)
 	}
-	//#endregion
 
 	return (
 		<>
@@ -73,15 +93,38 @@ const VideoGridItem = (props: Props): JSX.Element => {
 				<Card onClick={() => setDialogOpen(true)}>
 					<CardActionArea>
 						<CardHeader
-							title={name}
-							subheader={"Type: " + format[0].toUpperCase() + format.slice(1, 5)}
+							title={video ? video.name : <Skeleton variant="text" />}
+							subheader={
+								video ? (
+									"Type: " +
+									video.format[0]!.toUpperCase() +
+									video.format.slice(1, 5)
+								) : (
+									<Skeleton variant="text" />
+								)
+							}
 						/>
-						<CardMedia component="img" width="100%" image={thumbnail} alt="Thumbnail" />
+						{video ? (
+							<CardMedia
+								component="img"
+								width="100%"
+								image={video.thumbnail}
+								alt="Thumbnail"
+							/>
+						) : (
+							<Skeleton variant="rectangular" width="100%" height={250} />
+						)}
 					</CardActionArea>
 				</Card>
 			</Grid>
 			<Dialog open={dialogOpen} onClose={handleDialogClose}>
-				<DialogTitle>Download MP{format === "audioonly" ? 3 : 4}</DialogTitle>
+				<DialogTitle>
+					{video ? (
+						"Download MP" + (video.format === "audioonly" ? 3 : 4)
+					) : (
+						<Skeleton variant="text" />
+					)}
+				</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						Make sure the filename you type in here has no invalid characters
@@ -95,7 +138,15 @@ const VideoGridItem = (props: Props): JSX.Element => {
 						InputProps={{
 							endAdornment: (
 								<InputAdornment position="end">
-									.mp{format === "audioonly" ? 3 : 4}
+									{video ? (
+										video.format === "audioonly" ? (
+											".mp3"
+										) : (
+											".mp4"
+										)
+									) : (
+										<Skeleton variant="text" width={36} height={36} />
+									)}
 								</InputAdornment>
 							)
 						}}
@@ -106,7 +157,9 @@ const VideoGridItem = (props: Props): JSX.Element => {
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleRemove}>Remove</Button>
-					<Button onClick={handleDownload}>Download</Button>
+					<Button onClick={handleDownload} disabled={!video}>
+						Download
+					</Button>
 				</DialogActions>
 			</Dialog>
 		</>

@@ -1,4 +1,4 @@
-import axios from "axios"
+import ErrorDialogContext from "../contexts/ErrorDialogContext"
 import VideoGridItem from "../components/VideoGridItem"
 import {
 	Button,
@@ -17,36 +17,25 @@ import { NextPage } from "next"
 import { useState } from "react"
 
 const Index: NextPage = () => {
-	//#region Hooks
-	const [dialogOpen, setDialogOpen] = useState(false)
+	const [dialogIsOpen, setDialogIsOpen] = useState(false)
 	const [dialogText, setDialogText] = useState("")
-	const [videos, setVideos] = useState<iVideo[]>([])
+	const [searches, setSearches] = useState<iSearch[]>([])
 	const [format, setFormat] = useState<"audioonly" | "videoandaudio">("audioonly")
 	const [url, setUrl] = useState("")
-	//#endregion
 
-	//#region Functions
 	const handleConvert = async () => {
-		axios
-			.post(`/api/validate/video-id`, { url })
-			.then(res => {
-				setVideos(videos => [
-					...videos,
-					{
-						...res.data,
-						format
-					}
-				])
-			})
-			.catch(err => {
-				setDialogOpen(true)
-				setDialogText(err.response?.data?.message || err.message)
-			})
+		setSearches(queries => [...queries, { url, format, time: Date.now() }])
+		setUrl("")
 	}
-	//#endregion
 
 	return (
-		<>
+		<ErrorDialogContext.Provider
+			value={{
+				isOpen: dialogIsOpen,
+				text: dialogText,
+				setIsOpen: setDialogIsOpen,
+				setText: setDialogText
+			}}>
 			<Container sx={{ my: 3 }}>
 				<TextField
 					sx={{ mt: 2 }}
@@ -75,14 +64,14 @@ const Index: NextPage = () => {
 				</Stack>
 
 				<Grid sx={{ mt: 3 }} container justifyContent="space-evenly" spacing={2}>
-					{videos.map((video, i) => (
-						<VideoGridItem key={i} video={video} setVideos={setVideos} />
+					{searches.map((query, i) => (
+						<VideoGridItem key={i} search={query} setSearches={setSearches} />
 					))}
 				</Grid>
 			</Container>
 			<Dialog
-				open={dialogOpen}
-				onClose={() => setDialogOpen(false)}
+				open={dialogIsOpen}
+				onClose={() => setDialogIsOpen(false)}
 				aria-labelledby="alert-dialog-title">
 				<DialogTitle id="alert-dialog-title">An Error Occured</DialogTitle>
 				<DialogContent>
@@ -91,12 +80,12 @@ const Index: NextPage = () => {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={() => setDialogOpen(false)} autoFocus>
+					<Button onClick={() => setDialogIsOpen(false)} autoFocus>
 						Okay
 					</Button>
 				</DialogActions>
 			</Dialog>
-		</>
+		</ErrorDialogContext.Provider>
 	)
 }
 
