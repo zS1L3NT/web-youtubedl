@@ -6,6 +6,10 @@ YouTube downloading website available [here](https://youtubedl.zectan.com/).
 You can choose the download type (Audio or Video), paste the link and click Convert to fetch information about a video.
 Once the video information loads, you can choose the filename (alphanumerical) then click Download to download.
 
+## Motivation
+
+Working YouTube downloaders without ads are becoming rarer nowadays because of copyright issues. I decided to build my own version of a YouTube video downloader so that I could use it for my personal use to download my own youtube videos.
+
 ## Features
 
 -   Download Audio or Video from YouTube
