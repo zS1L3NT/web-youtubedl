@@ -37,7 +37,6 @@ $ npm run dev
 -   TypeScript
     -   [![@types/express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/express?style=flat-square)](https://npmjs.com/package/@types/express)
     -   [![@types/fluent-fluent](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-fluent)
-    -   [![@types/node](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/node?style=flat-square)](https://npmjs.com/package/@types/node)
     -   [![@types/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/react?style=flat-square)](https://npmjs.com/package/@types/react)
     -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
 -   NextJS with an Express Server
@@ -48,7 +47,6 @@ $ npm run dev
     -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)
 -   MUI
     -   [![@mui/material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/material?style=flat-square)](https://npmjs.com/package/@mui/material)
-    -   [![@mui/icons-material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/icons-material?style=flat-square)](https://npmjs.com/package/@mui/icons-material)
     -   [![@emotion/styled](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@emotion/styled?style=flat-square)](https://npmjs.com/package/@emotion/styled)
     -   [![@emotion/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@emotion/react?style=flat-square)](https://npmjs.com/package/@emotion/react)
 -   YTDL
