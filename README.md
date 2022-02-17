@@ -22,7 +22,7 @@ With `yarn`
 
 ```
 $ yarn
-$ npm run dev
+$ yarn dev
 ```
 
 With `npm`
