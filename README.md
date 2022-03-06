@@ -22,14 +22,14 @@ With `yarn`
 
 ```
 $ yarn
-$ yarn dev
+$ yarn start
 ```
 
 With `npm`
 
 ```
 $ npm i
-$ npm run dev
+$ npm run start
 ```
 
 ## Built with

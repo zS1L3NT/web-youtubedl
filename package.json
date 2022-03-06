@@ -2,11 +2,10 @@
 	"name": "web-next-youtubedl",
 	"description": "YouTube Downloading website",
 	"author": "zS1L3NT <zechariahtan144@gmail.com> (https://www.zectan.com)",
+	"license": "GPL-3.0",
 	"scripts": {
-		"dev": "ts-node --files src/app.ts",
-		"build": "next build",
-		"start": "export NODE_ENV=production && ts-node --files src/app.ts",
-		"lint": "next lint"
+		"start": "ts-node --files src/app.ts",
+		"build": "next build"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.8.1",
