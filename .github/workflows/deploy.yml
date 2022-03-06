@@ -1,0 +1,55 @@
+name: Deploy
+on:
+    push:
+        branches: [main]
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Performing Repository Checkout
+              uses: actions/checkout@v2
+
+            - name: Deleting old files on Server
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  script: |
+                      cd /home/ubuntu/projects/web-next-youtubedl
+                      rm -rf .next
+                      rm -rf public
+                      rm -rf src
+
+            - name: Uploading new files to Server
+              uses: appleboy/scp-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  target: "/home/ubuntu/projects/web-next-youtubedl"
+                  source: "public/*,src/*,package.json,yarn.lock,tsconfig.json,next-env.d.ts"
+
+            - name: Performing Yarn Install on Server
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  script: "cd /home/ubuntu/projects/web-next-youtubedl && yarn"
+
+            - name: Building NextJS Project on Server
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  script: "cd /home/ubuntu/projects/web-next-youtubedl && yarn build"
+
+            - name: Restarting PM2 Process
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  password: ${{ secrets.SSH_PASSWORD }}
+                  script: "pm2 flush web-next-youtubedl && pm2 restart web-next-youtubedl"
