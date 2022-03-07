@@ -28,7 +28,7 @@ jobs:
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
                   target: "/home/ubuntu/projects/web-next-youtubedl"
-                  source: "public/*,src/*,package.json,yarn.lock,tsconfig.json,next-env.d.ts"
+                  source: "public/*,src/*,package.json,yarn.lock,tsconfig.json,next.config.js,next-env.d.ts"
 
             - name: Performing Yarn Install on Server
               uses: appleboy/ssh-action@master
