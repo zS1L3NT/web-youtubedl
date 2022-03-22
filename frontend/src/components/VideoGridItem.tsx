@@ -18,7 +18,6 @@ import {
 	Skeleton,
 	TextField
 } from "@mui/material"
-import { useRouter } from "next/router"
 
 interface Props {
 	search: iSearch
@@ -29,7 +28,6 @@ const VideoGridItem = (props: Props): JSX.Element => {
 	const { search, setSearches } = props
 
 	const { setIsOpen, setText } = useContext(ErrorDialogContext)
-	const router = useRouter()
 	const [dialogOpen, setDialogOpen] = useState(false)
 	const [errorText, setErrorText] = useState<string | null>(null)
 	const [filename, setFilename] = useState<string>("")
@@ -71,7 +69,7 @@ const VideoGridItem = (props: Props): JSX.Element => {
 					url.searchParams.set("format", video.format)
 					url.searchParams.set("name", filename)
 					url.searchParams.set("bitrate", `${video.bitrate}`)
-					router.push(url)
+					window.location.href = url.href
 				})
 				.catch(err => setErrorText(err.response?.data?.message || err.message))
 		}

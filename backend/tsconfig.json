@@ -2,14 +2,14 @@
 	"compilerOptions": {
 		/** Transpiler */
 		"target": "esnext",
-		"lib": ["dom", "dom.iterable", "esnext"], // "esnext"
+		"lib": ["esnext"], // "dom", "dom.iterable", "esnext"
 		"module": "commonjs", // esnext
 		"moduleResolution": "node",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 
 		/** Project */
-		// "rootDir": "src",
+		"rootDir": "src",
 		"outDir": "dist",
 		"typeRoots": ["./node_modules/@types", "./src/@types"],
 
@@ -30,13 +30,12 @@
 		"forceConsistentCasingInFileNames": true,
 
 		/** Other */
-		"noEmit": true,
-		"allowJs": true,
-		"jsx": "preserve",
-		"skipLibCheck": true,
-		"isolatedModules": true,
-		"incremental": true
+		// "noEmit": true,
+		// "allowJs": true,
+		// "jsx": "react-jsx",
+		// "skipLibCheck": true,
+		// "isolatedModules": true,
+		// "incremental": true
 	},
-	"include": ["src", "next-env.d.ts"],
-	"exclude": ["node_modules"]
+	"include": ["src", "../types.d.ts"]
 }
