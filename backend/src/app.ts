@@ -29,7 +29,7 @@ global.logger = Tracer.colorConsole({
 		error: [colors.red, colors.bold]
 	},
 	preprocess: data => {
-		data.path = data.path.split("\\src\\")[1]!.replaceAll("\\", "/")
+		data.path = data.path.split(/\\(src|dist)\\/)[1]!.replaceAll("\\", "/")
 	}
 })
 
