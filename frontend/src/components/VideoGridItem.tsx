@@ -1,6 +1,7 @@
 import axios from "axios"
 import DownloadDialog from "./dialogs/DownloadDialog"
 import ErrorDialogContext from "../contexts/ErrorDialogContext"
+import ResultsContext from "../contexts/ResultsContext"
 import { Card, CardActionArea, CardHeader, CardMedia, Grid, Skeleton } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 
@@ -12,6 +13,7 @@ const VideoGridItem = (props: Props): JSX.Element => {
 	const { result } = props
 
 	const { setIsOpen, setText } = useContext(ErrorDialogContext)
+	const { setResults } = useContext(ResultsContext)
 	const [dialogOpen, setDialogOpen] = useState(false)
 	const [video, setVideo] = useState<iVideo | null>(null)
 	const [controller] = useState(new AbortController())
@@ -29,6 +31,7 @@ const VideoGridItem = (props: Props): JSX.Element => {
 				if (!controller.signal.aborted) {
 					setIsOpen(true)
 					setText(err.response?.data?.message || err.message)
+					setResults(results => results.filter(s => s.time !== result.time))
 				}
 			})
 		return () => {
