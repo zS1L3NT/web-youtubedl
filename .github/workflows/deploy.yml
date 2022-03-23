@@ -1,13 +1,32 @@
 name: Deploy
 on:
     push:
-        branches: [main]
+        branches: [main, testing-actions]
 jobs:
     deploy:
         runs-on: ubuntu-latest
         steps:
             - name: Performing Repository Checkout
               uses: actions/checkout@v2
+            
+            - name: Installing Pnpm on Workspace
+              run: npm i -g pnpm
+
+            - name: Transpiling Express Project
+              run: |
+                cd backend
+                pnpm i
+                tsc
+                mv dist ..
+                mv package.json ..
+                mv pnpm-lock.yaml ..
+            
+            - name: Building React Project
+              run: |
+                cd frontend
+                npm i
+                pnpm build
+                mv dist ../public
 
             - name: Deleting old files on Server
               uses: appleboy/ssh-action@master
@@ -17,9 +36,7 @@ jobs:
                   password: ${{ secrets.SSH_PASSWORD }}
                   script: |
                       cd /home/ubuntu/projects/web-next-youtubedl
-                      rm -rf .next
-                      rm -rf public
-                      rm -rf src
+                      rm -rf public dist
 
             - name: Uploading new files to Server
               uses: appleboy/scp-action@master
@@ -28,23 +45,15 @@ jobs:
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
                   target: "/home/ubuntu/projects/web-next-youtubedl"
-                  source: "public/*,src/*,package.json,yarn.lock,tsconfig.json,next.config.js,next-env.d.ts"
+                  source: "public/*,dist/*,package.json,pnpm-lock.yaml"
 
-            - name: Performing Yarn Install on Server
+            - name: Performing Pnpm Install on Server
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ secrets.SSH_HOST }}
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
-                  script: "cd /home/ubuntu/projects/web-next-youtubedl && yarn"
-
-            - name: Building NextJS Project on Server
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.SSH_HOST }}
-                  username: ${{ secrets.SSH_USERNAME }}
-                  password: ${{ secrets.SSH_PASSWORD }}
-                  script: "cd /home/ubuntu/projects/web-next-youtubedl && yarn build"
+                  script: "cd /home/ubuntu/projects/web-next-youtubedl && pnpm i"
 
             - name: Restarting PM2 Process
               uses: appleboy/ssh-action@master
