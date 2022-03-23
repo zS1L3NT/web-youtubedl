@@ -4,6 +4,7 @@
 	"author": "zS1L3NT <zechariahtan144@gmail.com> (https://www.zectan.com)",
 	"license": "GPL-3.0",
 	"scripts": {
+		"start": "node dist/app.js",
 		"dev": "ts-node --files src/app.ts",
 		"build": "tsc"
 	},
