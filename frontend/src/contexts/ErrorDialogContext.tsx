@@ -1,10 +1,10 @@
-import { createContext } from "react"
+import { createContext, Dispatch, SetStateAction } from "react"
 
 interface iDialogData {
 	isOpen: boolean
 	text: string
-	setIsOpen: (isOpen: boolean) => void
-	setText: (text: string) => void
+	setIsOpen: Dispatch<SetStateAction<boolean>>
+	setText: Dispatch<SetStateAction<string>>
 }
 
 export default createContext<iDialogData>({
