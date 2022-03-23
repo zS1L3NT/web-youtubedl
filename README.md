@@ -18,43 +18,46 @@ Working YouTube downloaders without ads are becoming rarer nowadays because of c
 
 ## Usage
 
-With `yarn`
-
-```
-$ yarn
-$ yarn start
-```
-
-With `npm`
-
 ```
 $ npm i
-$ npm run start
+$ npm run dev
 ```
 
 ## Built with
 
 -   TypeScript
     -   [![@types/express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/express?style=flat-square)](https://npmjs.com/package/@types/express)
-    -   [![@types/fluent-fluent](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-fluent)
+    -   [![@types/fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-ffmpeg)
+    -   [![@types/luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/luxon?style=flat-square)](https://npmjs.com/package/@types/luxon)
+    -   [![@types/morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/morgan?style=flat-square)](https://npmjs.com/package/@types/morgan)
     -   [![@types/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/react?style=flat-square)](https://npmjs.com/package/@types/react)
+    -   [![@types/react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/react-dom?style=flat-square)](https://npmjs.com/package/@types/react-dom)
     -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
--   NextJS with an Express Server
-    -   [![next](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/next?style=flat-square)](https://npmjs.com/package/next)
-    -   [![next-pwa](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/next-pwa?style=flat-square)](https://npmjs.com/package/next-pwa)
+-	Vite
+    -   [![@vitejs/plugin-react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@vitejs/plugin-react?style=flat-square)](https://npmjs.com/package/@vitejs/plugin-react)
+    -   [![vite](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/vite?style=flat-square)](https://npmjs.com/package/vite)
+    -   [![vite-plugin-pwa](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/vite-plugin-pwa?style=flat-square)](https://npmjs.com/package/vite-plugin-pwa)
+    -   [![workbox-window](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/workbox-window?style=flat-square)](https://npmjs.com/package/workbox-window)
+-   React
     -   [![react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react?style=flat-square)](https://npmjs.com/package/react)
     -   [![react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react-dom?style=flat-square)](https://npmjs.com/package/react-dom)
-    -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)
 -   MUI
+    -   [![@mui/icons-material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/icons-material?style=flat-square)](https://npmjs.com/package/@mui/icons-material)
     -   [![@mui/material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/material?style=flat-square)](https://npmjs.com/package/@mui/material)
     -   [![@emotion/styled](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@emotion/styled?style=flat-square)](https://npmjs.com/package/@emotion/styled)
     -   [![@emotion/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@emotion/react?style=flat-square)](https://npmjs.com/package/@emotion/react)
+-	Express
+    -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)
+    -   [![morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/morgan?style=flat-square)](https://npmjs.com/package/morgan)
 -   YTDL
     -   [![ytdl-core](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/ytdl-core?style=flat-square)](https://npmjs.com/package/ytdl-core)
--   FFmpeg
     -   [![fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/fluent-ffmpeg)
     -   [![@ffmpeg-installer/ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@ffmpeg-installer/ffmpeg?style=flat-square)](https://npmjs.com/package/@ffmpeg-installer/ffmpeg)
 -   Miscellaneous
     -   [![axios](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/axios?style=flat-square)](https://npmjs.com/package/axios)
+    -   [![colors](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/colors?style=flat-square)](https://npmjs.com/package/colors)
+    -   [![dotenv](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dotenv?style=flat-square)](https://npmjs.com/package/dotenv)
+    -   [![luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/luxon?style=flat-square)](https://npmjs.com/package/luxon)
     -   [![no-try](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/no-try?style=flat-square)](https://npmjs.com/package/no-try)
+    -   [![tracer](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/tracer?style=flat-square)](https://npmjs.com/package/tracer)
     -   [![validate-any](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/validate-any?style=flat-square)](https://npmjs.com/package/validate-any)
