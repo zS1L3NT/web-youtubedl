@@ -36,8 +36,7 @@ jobs:
                   password: ${{ secrets.SSH_PASSWORD }}
                   script: |
                       cd /home/ubuntu/projects/web-next-youtubedl
-                      rm -rf public
-                      rm -rf dist
+                      rm -rf public dist
 
             - name: Uploading new files to Server
               uses: appleboy/scp-action@master
