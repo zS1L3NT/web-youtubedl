@@ -29,7 +29,11 @@ global.logger = Tracer.colorConsole({
 		error: [colors.red, colors.bold]
 	},
 	preprocess: data => {
-		data.path = data.path.split(/\\(src|dist)\\/)[1]!.replaceAll("\\", "/")
+		data.path = data.path
+			.split("web-next-youtubedl")
+			.at(1)!
+			.replaceAll("\\", "/")
+			.replace(/\/(backend\/src|dist)/, "src")
 	}
 })
 
@@ -40,7 +44,7 @@ morgan.token(
 	"timestamp",
 	() =>
 		DateTime.now().toFormat("dd LLL yyyy, hh:mm:ss") +
-		DateTime.now().toFormat("a").toLowerCase() 
+		DateTime.now().toFormat("a").toLowerCase()
 )
 app.use(morgan("[:timestamp] Opening :method :url", { immediate: true }))
 app.use(morgan("[:timestamp] Closing :method :url :status after :response-time ms"))
