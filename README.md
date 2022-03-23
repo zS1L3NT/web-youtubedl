@@ -1,6 +1,6 @@
 # YouTube DL
 
-![License](https://img.shields.io/github/license/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Languages](https://img.shields.io/github/languages/count/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Top Language](https://img.shields.io/github/languages/top/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Commit Activity](https://img.shields.io/github/commit-activity/y/zS1L3NT/web-next-youtubedl?style=for-the-badge) ![Last commit](https://img.shields.io/github/last-commit/zS1L3NT/web-next-youtubedl?style=for-the-badge)
+![License](https://img.shields.io/github/license/zS1L3NT/web-youtubedl?style=for-the-badge) ![Languages](https://img.shields.io/github/languages/count/zS1L3NT/web-youtubedl?style=for-the-badge) ![Top Language](https://img.shields.io/github/languages/top/zS1L3NT/web-youtubedl?style=for-the-badge) ![Commit Activity](https://img.shields.io/github/commit-activity/y/zS1L3NT/web-youtubedl?style=for-the-badge) ![Last commit](https://img.shields.io/github/last-commit/zS1L3NT/web-youtubedl?style=for-the-badge)
 
 YouTube downloading website available [here](https://youtubedl.zectan.com/).
 You can choose the download type (Audio or Video), paste the link and click Convert to fetch information about a video.
@@ -26,38 +26,38 @@ $ npm run dev
 ## Built with
 
 -   TypeScript
-    -   [![@types/express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/express?style=flat-square)](https://npmjs.com/package/@types/express)
-    -   [![@types/fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-ffmpeg)
-    -   [![@types/luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/luxon?style=flat-square)](https://npmjs.com/package/@types/luxon)
-    -   [![@types/morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/morgan?style=flat-square)](https://npmjs.com/package/@types/morgan)
-    -   [![@types/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/react?style=flat-square)](https://npmjs.com/package/@types/react)
-    -   [![@types/react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@types/react-dom?style=flat-square)](https://npmjs.com/package/@types/react-dom)
-    -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
+    -   [![@types/express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/express?style=flat-square)](https://npmjs.com/package/@types/express)
+    -   [![@types/fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-ffmpeg)
+    -   [![@types/luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/luxon?style=flat-square)](https://npmjs.com/package/@types/luxon)
+    -   [![@types/morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/morgan?style=flat-square)](https://npmjs.com/package/@types/morgan)
+    -   [![@types/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/react?style=flat-square)](https://npmjs.com/package/@types/react)
+    -   [![@types/react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/react-dom?style=flat-square)](https://npmjs.com/package/@types/react-dom)
+    -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
 -	Vite
-    -   [![@vitejs/plugin-react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/@vitejs/plugin-react?style=flat-square)](https://npmjs.com/package/@vitejs/plugin-react)
-    -   [![vite](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/vite?style=flat-square)](https://npmjs.com/package/vite)
-    -   [![vite-plugin-pwa](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/vite-plugin-pwa?style=flat-square)](https://npmjs.com/package/vite-plugin-pwa)
-    -   [![workbox-window](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dev/workbox-window?style=flat-square)](https://npmjs.com/package/workbox-window)
+    -   [![@vitejs/plugin-react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@vitejs/plugin-react?style=flat-square)](https://npmjs.com/package/@vitejs/plugin-react)
+    -   [![vite](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/vite?style=flat-square)](https://npmjs.com/package/vite)
+    -   [![vite-plugin-pwa](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/vite-plugin-pwa?style=flat-square)](https://npmjs.com/package/vite-plugin-pwa)
+    -   [![workbox-window](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/workbox-window?style=flat-square)](https://npmjs.com/package/workbox-window)
 -   React
-    -   [![react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react?style=flat-square)](https://npmjs.com/package/react)
-    -   [![react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/react-dom?style=flat-square)](https://npmjs.com/package/react-dom)
+    -   [![react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/react?style=flat-square)](https://npmjs.com/package/react)
+    -   [![react-dom](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/react-dom?style=flat-square)](https://npmjs.com/package/react-dom)
 -   MUI
-    -   [![@mui/icons-material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/icons-material?style=flat-square)](https://npmjs.com/package/@mui/icons-material)
-    -   [![@mui/material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@mui/material?style=flat-square)](https://npmjs.com/package/@mui/material)
-    -   [![@emotion/styled](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@emotion/styled?style=flat-square)](https://npmjs.com/package/@emotion/styled)
-    -   [![@emotion/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@emotion/react?style=flat-square)](https://npmjs.com/package/@emotion/react)
+    -   [![@mui/icons-material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@mui/icons-material?style=flat-square)](https://npmjs.com/package/@mui/icons-material)
+    -   [![@mui/material](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@mui/material?style=flat-square)](https://npmjs.com/package/@mui/material)
+    -   [![@emotion/styled](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@emotion/styled?style=flat-square)](https://npmjs.com/package/@emotion/styled)
+    -   [![@emotion/react](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@emotion/react?style=flat-square)](https://npmjs.com/package/@emotion/react)
 -	Express
-    -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)
-    -   [![morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/morgan?style=flat-square)](https://npmjs.com/package/morgan)
+    -   [![express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/express?style=flat-square)](https://npmjs.com/package/express)
+    -   [![morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/morgan?style=flat-square)](https://npmjs.com/package/morgan)
 -   YTDL
-    -   [![ytdl-core](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/ytdl-core?style=flat-square)](https://npmjs.com/package/ytdl-core)
-    -   [![fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/fluent-ffmpeg)
-    -   [![@ffmpeg-installer/ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/@ffmpeg-installer/ffmpeg?style=flat-square)](https://npmjs.com/package/@ffmpeg-installer/ffmpeg)
+    -   [![ytdl-core](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/ytdl-core?style=flat-square)](https://npmjs.com/package/ytdl-core)
+    -   [![fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/fluent-ffmpeg)
+    -   [![@ffmpeg-installer/ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@ffmpeg-installer/ffmpeg?style=flat-square)](https://npmjs.com/package/@ffmpeg-installer/ffmpeg)
 -   Miscellaneous
-    -   [![axios](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/axios?style=flat-square)](https://npmjs.com/package/axios)
-    -   [![colors](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/colors?style=flat-square)](https://npmjs.com/package/colors)
-    -   [![dotenv](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/dotenv?style=flat-square)](https://npmjs.com/package/dotenv)
-    -   [![luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/luxon?style=flat-square)](https://npmjs.com/package/luxon)
-    -   [![no-try](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/no-try?style=flat-square)](https://npmjs.com/package/no-try)
-    -   [![tracer](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/tracer?style=flat-square)](https://npmjs.com/package/tracer)
-    -   [![validate-any](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-next-youtubedl/validate-any?style=flat-square)](https://npmjs.com/package/validate-any)
+    -   [![axios](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/axios?style=flat-square)](https://npmjs.com/package/axios)
+    -   [![colors](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/colors?style=flat-square)](https://npmjs.com/package/colors)
+    -   [![dotenv](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dotenv?style=flat-square)](https://npmjs.com/package/dotenv)
+    -   [![luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/luxon?style=flat-square)](https://npmjs.com/package/luxon)
+    -   [![no-try](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/no-try?style=flat-square)](https://npmjs.com/package/no-try)
+    -   [![tracer](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/tracer?style=flat-square)](https://npmjs.com/package/tracer)
+    -   [![validate-any](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/validate-any?style=flat-square)](https://npmjs.com/package/validate-any)

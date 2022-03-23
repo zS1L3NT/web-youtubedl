@@ -35,7 +35,7 @@ jobs:
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
                   script: |
-                      cd /home/ubuntu/projects/web-next-youtubedl
+                      cd /home/ubuntu/projects/web-youtubedl
                       rm -rf public dist
 
             - name: Uploading new files to Server
@@ -44,7 +44,7 @@ jobs:
                   host: ${{ secrets.SSH_HOST }}
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
-                  target: "/home/ubuntu/projects/web-next-youtubedl"
+                  target: "/home/ubuntu/projects/web-youtubedl"
                   source: "public/*,dist/*,package.json,pnpm-lock.yaml"
 
             - name: Performing Pnpm Install on Server
@@ -53,7 +53,7 @@ jobs:
                   host: ${{ secrets.SSH_HOST }}
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
-                  script: "cd /home/ubuntu/projects/web-next-youtubedl && pnpm i"
+                  script: "cd /home/ubuntu/projects/web-youtubedl && pnpm i"
 
             - name: Restarting PM2 Process
               uses: appleboy/ssh-action@master
@@ -61,4 +61,4 @@ jobs:
                   host: ${{ secrets.SSH_HOST }}
                   username: ${{ secrets.SSH_USERNAME }}
                   password: ${{ secrets.SSH_PASSWORD }}
-                  script: "pm2 flush web-next-youtubedl && pm2 restart web-next-youtubedl"
+                  script: "pm2 flush web-youtubedl && pm2 restart web-youtubedl"
