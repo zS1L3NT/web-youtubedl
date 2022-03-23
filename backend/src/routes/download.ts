@@ -1,28 +1,17 @@
 import ffmpeg from "fluent-ffmpeg"
 import ytdl from "ytdl-core"
-import { OBJECT, STRING, validate } from "validate-any"
+import { OBJECT, STRING, validate, withValidQuery } from "validate-any"
 import { Request, Response } from "express"
 
-export const GET = (req: Request, res: Response) => {
-	const { success, errors, data } = validate(
-		req.query,
-		OBJECT({
-			url: STRING(),
-			format: STRING("videoandaudio", "audioonly"),
-			name: STRING(),
-			bitrate: STRING()
-		}),
-		"URL"
-	)
-
-	if (!success) {
-		res.status(400).send(
-			"The Following errors exist in the URL:" + errors.map(e => "<br>\n" + JSON.stringify(e)).join("")
-		)
-		return
-	}
-
-	const { url, format, name, bitrate } = data!
+export const GET = withValidQuery(
+	OBJECT({
+		url: STRING(),
+		format: STRING("videoandaudio", "audioonly"),
+		name: STRING(),
+		bitrate: STRING()
+	})
+)<Request, Response>((req, res) => {
+	const { url, format, name, bitrate } = req.query
 	const stream = ytdl(url, {
 		filter: format,
 		quality: "highest"
@@ -49,4 +38,4 @@ export const GET = (req: Request, res: Response) => {
 			})
 			.pipe(res)
 	}
-}
+})
