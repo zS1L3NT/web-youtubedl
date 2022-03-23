@@ -3,8 +3,10 @@ import dotenv from "dotenv"
 import express from "express"
 import ffmpeg from "fluent-ffmpeg"
 import fs from "fs"
+import morgan from "morgan"
 import path from "path"
 import Tracer from "tracer"
+import { DateTime } from "luxon"
 
 dotenv.config()
 ffmpeg.setFfmpegPath(require("@ffmpeg-installer/ffmpeg").path)
@@ -34,6 +36,15 @@ global.logger = Tracer.colorConsole({
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "../public")))
 
+morgan.token(
+	"timestamp",
+	() =>
+		DateTime.now().toFormat("dd LLL yyyy, hh:mm:ss") +
+		DateTime.now().toFormat("a").toLowerCase() 
+)
+app.use(morgan("[:timestamp] Opening :method :url", { immediate: true }))
+app.use(morgan("[:timestamp] Closing :method :url :status after :response-time ms"))
+
 const readRouteFolder = (folderName: string) => {
 	const folderPath = path.join(__dirname, "routes", folderName)
 
@@ -44,7 +55,7 @@ const readRouteFolder = (folderName: string) => {
 		if (extensionName) {
 			// Entity is a file
 			const file = require(path.join(folderPath, entityName)) as Record<any, any>
-			for (const [method, handler] of Object.entries(file)) {				
+			for (const [method, handler] of Object.entries(file)) {
 				app[method.toLowerCase() as "get" | "post" | "put" | "delete"](
 					"/api" + pathName.replace(/\[(\w+)\]/g, ":$1"),
 					handler
