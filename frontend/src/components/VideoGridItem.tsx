@@ -1,5 +1,5 @@
 import axios from "axios"
-import DownloadDialog from "./dialogs/DownloadDialog"
+import DownloadDialog from "./Popups/DownloadDialog"
 import ErrorDialogContext from "../contexts/ErrorDialogContext"
 import ResultsContext from "../contexts/ResultsContext"
 import { Card, CardActionArea, CardHeader, CardMedia, Grid, Skeleton } from "@mui/material"

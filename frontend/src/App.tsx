@@ -1,5 +1,6 @@
-import ErrorDialog from "./components/dialogs/ErrorDialog"
+import ErrorDialog from "./components/Popups/ErrorDialog"
 import Navigator from "./components/Navigator"
+import PWASnackbar from "./components/Popups/PWASnackbar"
 import ResultsContext from "./contexts/ResultsContext"
 import VideoGridItem from "./components/VideoGridItem"
 import { Button, Container, Grid, MenuItem, Stack, TextField } from "@mui/material"
@@ -54,6 +55,7 @@ const App = (): JSX.Element => {
 				</Grid>
 			</Container>
 			<ErrorDialog />
+			<PWASnackbar />
 		</>
 	)
 }
