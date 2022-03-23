@@ -1,6 +1,6 @@
 import ffmpeg from "fluent-ffmpeg"
 import ytdl from "ytdl-core"
-import { OBJECT, STRING, validate, withValidQuery } from "validate-any"
+import { OBJECT, STRING, withValidQuery } from "validate-any"
 import { Request, Response } from "express"
 
 export const GET = withValidQuery(
@@ -24,7 +24,7 @@ export const GET = withValidQuery(
 
 	if (format === "videoandaudio") {
 		stream.pipe(res).on("error", err => {
-			console.error("Video: ", err.message)
+			logger.error("Video: ", err.message)
 		})
 	} else {
 		ffmpeg(stream)
@@ -33,7 +33,7 @@ export const GET = withValidQuery(
 			.toFormat("mp3")
 			.on("error", err => {
 				if (err.message !== "Output stream closed") {
-					console.error("Audio: ", err.message)
+					logger.error("Audio: ", err.message)
 				}
 			})
 			.pipe(res)

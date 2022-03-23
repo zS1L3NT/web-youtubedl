@@ -58,6 +58,4 @@ const readRouteFolder = (folderName: string) => {
 
 readRouteFolder("")
 
-app.all("*", console.log)
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(PORT, () => logger.log(`Server running on port ${PORT}`))
