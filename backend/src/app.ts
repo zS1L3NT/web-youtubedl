@@ -30,10 +30,10 @@ global.logger = Tracer.colorConsole({
 	},
 	preprocess: data => {
 		data.path = data.path
-			.split("web-youtubedl")
-			.at(1)!
 			.replaceAll("\\", "/")
-			.replace(/\/(backend\/src|dist)/, "src")
+			.split("web-youtubedl")
+			.at(-1)!
+			.replace(/\/app\/backend\/(src|dist)/, "src")
 	}
 })
 
