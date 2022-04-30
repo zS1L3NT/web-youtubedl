@@ -1,6 +1,7 @@
 {
 	"scripts": {
 		"dev": "concurrently \"cd backend && pnpm dev\" \"cd frontend && pnpm dev\"",
+		"heroku-prebuild": "npm i --prefix backend && npm i --prefix frontend",
 		"build": "npm run --prefix backend build && npm run --prefix frontend build"
 	}
 }
