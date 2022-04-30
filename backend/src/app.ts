@@ -38,7 +38,7 @@ global.logger = Tracer.colorConsole({
 })
 
 app.use(express.json())
-app.use(express.static(path.join(__dirname, "../public")))
+app.use(express.static(path.join(__dirname, "../../frontend/dist")))
 
 morgan.token(
 	"timestamp",
