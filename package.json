@@ -1,7 +1,8 @@
 {
 	"scripts": {
+		"start": "npm start --prefix backend",
 		"dev": "concurrently \"cd backend && pnpm dev\" \"cd frontend && pnpm dev\"",
-		"build": "npm run --prefix backend build && npm run --prefix frontend build"
+		"build": "npm run build --prefix backend && npm run build --prefix frontend"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.8.2",
