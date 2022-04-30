@@ -1,6 +1,6 @@
 {
 	"scripts": {
 		"dev": "concurrently \"cd backend && pnpm dev\" \"cd frontend && pnpm dev\"",
-		"build": "pnpm --prefix backend build && pnpm --prefix frontend build"
+		"build": "npm run --prefix backend build && npm run --prefix frontend build"
 	}
 }
