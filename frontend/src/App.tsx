@@ -1,11 +1,18 @@
-import ErrorDialog from "./components/Popups/ErrorDialog"
-import Navigator from "./components/Navigator"
-import PWASnackbar from "./components/Popups/PWASnackbar"
-import ResultsContext from "./contexts/ResultsContext"
-import VideoGridItem from "./components/VideoGridItem"
-import { Button, Container, Grid, MenuItem, Stack, TextField } from "@mui/material"
-import { CssBaseline } from "@mui/material"
 import { useContext, useState } from "react"
+
+import Button from "@mui/material/Button"
+import Container from "@mui/material/Container"
+import CssBaseline from "@mui/material/CssBaseline"
+import Grid from "@mui/material/Grid"
+import MenuItem from "@mui/material/MenuItem"
+import Stack from "@mui/material/Stack"
+import TextField from "@mui/material/TextField"
+
+import Navigator from "./components/Navigator"
+import ErrorDialog from "./components/Popups/ErrorDialog"
+import PWASnackbar from "./components/Popups/PWASnackbar"
+import VideoGridItem from "./components/VideoGridItem"
+import ResultsContext from "./contexts/ResultsContext"
 
 const App = (): JSX.Element => {
 	const { setResults, results } = useContext(ResultsContext)

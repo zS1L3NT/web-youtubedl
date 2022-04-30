@@ -1,13 +1,13 @@
-import ErrorDialogContext from "../../contexts/ErrorDialogContext"
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogContentText,
-	DialogTitle
-} from "@mui/material"
 import { useContext } from "react"
+
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogContentText from "@mui/material/DialogContentText"
+import DialogTitle from "@mui/material/DialogTitle"
+
+import ErrorDialogContext from "../../contexts/ErrorDialogContext"
 
 const ErrorDialog = () => {
 	const { isOpen, setIsOpen, text } = useContext(ErrorDialogContext)

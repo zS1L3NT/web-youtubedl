@@ -1,4 +1,6 @@
-import { AppBar, Toolbar, Typography } from "@mui/material"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
 
 const Navigator = (): JSX.Element => (
 	<AppBar sx={{ bgcolor: "primary.main" }} position="relative">

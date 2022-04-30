@@ -1,7 +1,8 @@
-import { cacheNames, clientsClaim } from "workbox-core"
 import { ManifestEntry } from "workbox-build"
-import { NetworkFirst, NetworkOnly, Strategy, StrategyHandler } from "workbox-strategies"
+import { cacheNames, clientsClaim } from "workbox-core"
 import { registerRoute, setCatchHandler, setDefaultHandler } from "workbox-routing"
+import { NetworkFirst, NetworkOnly, Strategy, StrategyHandler } from "workbox-strategies"
+
 /* eslint-disable no-console */
 
 // Give TypeScript the correct global.

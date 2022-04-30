@@ -1,9 +1,16 @@
 import axios from "axios"
-import DownloadDialog from "./Popups/DownloadDialog"
+import { useContext, useEffect, useState } from "react"
+
+import Card from "@mui/material/Card"
+import CardActionArea from "@mui/material/CardActionArea"
+import CardHeader from "@mui/material/CardHeader"
+import CardMedia from "@mui/material/CardMedia"
+import Grid from "@mui/material/Grid"
+import Skeleton from "@mui/material/Skeleton"
+
 import ErrorDialogContext from "../contexts/ErrorDialogContext"
 import ResultsContext from "../contexts/ResultsContext"
-import { Card, CardActionArea, CardHeader, CardMedia, Grid, Skeleton } from "@mui/material"
-import { useContext, useEffect, useState } from "react"
+import DownloadDialog from "./Popups/DownloadDialog"
 
 interface Props {
 	result: iResult
