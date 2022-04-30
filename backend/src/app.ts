@@ -11,7 +11,7 @@ import { DateTime } from "luxon"
 dotenv.config()
 ffmpeg.setFfmpegPath(require("@ffmpeg-installer/ffmpeg").path)
 
-const PORT = 1902
+const PORT = process.env.PORT || 1902
 const app = express()
 
 global.logger = Tracer.colorConsole({
