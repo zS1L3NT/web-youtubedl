@@ -44,6 +44,7 @@ const DownloadDialog = (props: Props) => {
 					url.searchParams.set("name", filename)
 					url.searchParams.set("bitrate", `${video.bitrate}`)
 					window.location.href = url.href
+					setOpen(false)
 				})
 				.catch(err => setErrorText(err.response?.data?.message || err.message))
 		}
