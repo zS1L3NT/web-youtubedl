@@ -28,7 +28,6 @@ dependencies:
   axios: 0.26.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
-  workbox-core: 6.5.1
 
 devDependencies:
   '@types/react': 17.0.41
@@ -38,6 +37,7 @@ devDependencies:
   vite: 2.8.6
   vite-plugin-pwa: 0.11.13_vite@2.8.6
   workbox-build: 6.5.1
+  workbox-core: 6.5.1
   workbox-routing: 6.5.1
   workbox-strategies: 6.5.1
   workbox-window: 6.5.1
@@ -3335,6 +3335,7 @@ packages:
 
   /workbox-core/6.5.1:
     resolution: {integrity: sha512-qObXZ39aFJ2N8X7IUbGrJHKWguliCuU1jOXM/I4MTT84u9BiKD2rHMkIzgeRP1Ixu9+cXU4/XHJq3Cy0Qqc5hw==}
+    dev: true
 
   /workbox-expiration/6.5.1:
     resolution: {integrity: sha512-iY/cTADAQATMmPkUBRmQdacqq0TJd2wMHimBQz+tRnPGHSMH+/BoLPABPnu7O7rT/g/s59CUYYRGxe3mEgoJCA==}
