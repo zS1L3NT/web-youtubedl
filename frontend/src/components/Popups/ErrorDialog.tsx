@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle"
 
 import ErrorDialogContext from "../../contexts/ErrorDialogContext"
 
-const ErrorDialog = () => {
+const _ErrorDialog = () => {
 	const { isOpen, setIsOpen, text } = useContext(ErrorDialogContext)
 
 	return (
@@ -27,4 +27,4 @@ const ErrorDialog = () => {
 	)
 }
 
-export default ErrorDialog
+export default _ErrorDialog

@@ -2,7 +2,7 @@ import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 
-const Navigator = (): JSX.Element => (
+const _Navigator = () => (
 	<AppBar sx={{ bgcolor: "primary.main" }} position="relative">
 		<Toolbar>
 			<Typography variant="h6">YouTube DL</Typography>
@@ -10,4 +10,4 @@ const Navigator = (): JSX.Element => (
 	</AppBar>
 )
 
-export default Navigator
+export default _Navigator

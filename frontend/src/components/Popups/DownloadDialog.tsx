@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Dispatch, SetStateAction, useContext, useState } from "react"
+import { Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from "react"
 
 import Alert from "@mui/material/Alert"
 import Button from "@mui/material/Button"
@@ -14,14 +14,14 @@ import TextField from "@mui/material/TextField"
 
 import ResultsContext from "../../contexts/ResultsContext"
 
-interface Props {
-	time: number
-	video: iVideo | null
-	open: boolean
-	setOpen: Dispatch<SetStateAction<boolean>>
-}
-
-const DownloadDialog = (props: Props) => {
+const _DownloadDialog = (
+	props: PropsWithChildren<{
+		time: number
+		video: iVideo | null
+		open: boolean
+		setOpen: Dispatch<SetStateAction<boolean>>
+	}>
+) => {
 	const { time, video, open, setOpen } = props
 
 	const { setResults } = useContext(ResultsContext)
@@ -109,4 +109,4 @@ const DownloadDialog = (props: Props) => {
 	)
 }
 
-export default DownloadDialog
+export default _DownloadDialog

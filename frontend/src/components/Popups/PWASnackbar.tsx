@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade"
 import IconButton from "@mui/material/IconButton"
 import Snackbar from "@mui/material/Snackbar"
 
-const PWASnackbar = () => {
+const _PWASnackbar = () => {
 	const {
 		offlineReady: [offlineReady, setOfflineReady],
 		needRefresh: [needRefresh, setNeedRefresh],
@@ -55,4 +55,4 @@ const PWASnackbar = () => {
 	)
 }
 
-export default PWASnackbar
+export default _PWASnackbar

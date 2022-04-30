@@ -14,7 +14,7 @@ import PWASnackbar from "./components/Popups/PWASnackbar"
 import VideoGridItem from "./components/VideoGridItem"
 import ResultsContext from "./contexts/ResultsContext"
 
-const App = (): JSX.Element => {
+const _App = () => {
 	const { setResults, results } = useContext(ResultsContext)
 	const [format, setFormat] = useState<"audioonly" | "videoandaudio">("audioonly")
 	const [url, setUrl] = useState("")
@@ -67,4 +67,4 @@ const App = (): JSX.Element => {
 	)
 }
 
-export default App
+export default _App

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useContext, useEffect, useState } from "react"
+import { PropsWithChildren, useContext, useEffect, useState } from "react"
 
 import Card from "@mui/material/Card"
 import CardActionArea from "@mui/material/CardActionArea"
@@ -12,11 +12,11 @@ import ErrorDialogContext from "../contexts/ErrorDialogContext"
 import ResultsContext from "../contexts/ResultsContext"
 import DownloadDialog from "./Popups/DownloadDialog"
 
-interface Props {
-	result: iResult
-}
-
-const VideoGridItem = (props: Props): JSX.Element => {
+const _VideoGridItem = (
+	props: PropsWithChildren<{
+		result: iResult
+	}>
+): JSX.Element => {
 	const { result } = props
 
 	const { setIsOpen, setText } = useContext(ErrorDialogContext)
@@ -86,4 +86,4 @@ const VideoGridItem = (props: Props): JSX.Element => {
 	)
 }
 
-export default VideoGridItem
+export default _VideoGridItem
