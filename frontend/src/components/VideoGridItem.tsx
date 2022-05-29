@@ -19,13 +19,20 @@ const _VideoGridItem = (
 
 	return (
 		<>
-			<Grid sx={{ width: { xs: 400, sm: 500 } }} item>
+			<Grid sx={{ width: 400 }} item>
 				<Card onClick={() => setDialogOpen(true)}>
 					<CardActionArea>
-						<CardHeader title={video.name} subheader={video.channel} />
+						<CardHeader
+							title={video.name}
+							titleTypographyProps={{ variant: "h6" }}
+							subheader={video.channel}
+						/>
 						<CardMedia
+							sx={{
+								width: "100%",
+								aspectRatio: "16/9"
+							}}
 							component="img"
-							width="100%"
 							image={video.thumbnail}
 							alt="Thumbnail"
 						/>

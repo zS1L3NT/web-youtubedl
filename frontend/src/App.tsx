@@ -48,7 +48,7 @@ const _App = () => {
 				/>
 
 				<Stack>
-					<Button sx={{ mt: 2, mx: "auto" }} variant="contained" onClick={handleConvert}>
+					<Button sx={{ my: 2, mx: "auto" }} variant="contained" onClick={handleConvert}>
 						Convert
 					</Button>
 				</Stack>
