@@ -26,7 +26,7 @@ export abstract class Route<BV = any, QV = any> {
 			}
 		}
 
-		let handle = this.handle
+		let handle = this.handle.bind(this)
 
 		for (const Middleware of this.middleware.reverse()) {
 			handle = () => new Middleware(req, res).handle(handle)
