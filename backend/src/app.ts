@@ -1,3 +1,4 @@
+import cors from "cors"
 import dotenv from "dotenv"
 import express from "express"
 import ffmpeg from "fluent-ffmpeg"
@@ -11,6 +12,10 @@ ffmpeg.setFfmpegPath(require("@ffmpeg-installer/ffmpeg").path)
 
 const PORT = process.env.PORT || 1902
 const app = express()
+
+if (process.env.NODE_ENV !== "production") {
+	app.use(cors())
+}
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "../../frontend/dist")))
