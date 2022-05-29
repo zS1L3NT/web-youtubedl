@@ -9,7 +9,9 @@ const queue: number[] = []
 export type iRoute = new (req: Request, res: Response) => Route
 
 export abstract class Route<BV = any, QV = any> {
-	constructor(protected readonly req: Request, protected readonly res: Response) {
+	constructor(protected readonly req: Request, protected readonly res: Response) {}
+
+	setup() {
 		queue.push(queue.length === 0 ? 1 : queue.at(-1)! + 1)
 		const rid = `{#${queue.at(-1)!}}`
 
@@ -40,7 +42,7 @@ export abstract class Route<BV = any, QV = any> {
 		let handle = this.handle.bind(this)
 
 		for (const Middleware of this.middleware.reverse()) {
-			handle = () => new Middleware(req, res).handle(handle)
+			handle = () => new Middleware(this.req, this.res).handle(handle)
 		}
 
 		handle()
