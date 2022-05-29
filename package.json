@@ -5,6 +5,7 @@
 		"build": "cd frontend && tsc && vite build && cd ../backend && tsc"
 	},
 	"dependencies": {
+		"@babel/core": "^7.18.2",
 		"@emotion/react": "^11.8.2",
 		"@emotion/styled": "^11.8.1",
 		"@ffmpeg-installer/ffmpeg": "^1.1.0",
