@@ -4,12 +4,12 @@ interface iDialogData {
 	isOpen: boolean
 	text: string
 	setIsOpen: Dispatch<SetStateAction<boolean>>
-	setText: Dispatch<SetStateAction<string>>
+	setMessage: Dispatch<SetStateAction<string>>
 }
 
 export default createContext<iDialogData>({
 	isOpen: false,
 	text: "",
 	setIsOpen: () => {},
-	setText: () => {}
+	setMessage: () => {}
 })

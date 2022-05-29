@@ -1,13 +1,7 @@
 type iVideo = {
+	uuid: string
 	id: string
 	name: string
-	format: "audioonly" | "videoandaudio"
+	channel: string
 	thumbnail: string
-	bitrate: number
-}
-
-type iResult = {
-	url: string
-	format: "audioonly" | "videoandaudio"
-	time: number
 }

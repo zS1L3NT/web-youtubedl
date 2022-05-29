@@ -9,27 +9,28 @@ import DialogContent from "@mui/material/DialogContent"
 import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
 import InputAdornment from "@mui/material/InputAdornment"
+import MenuItem from "@mui/material/MenuItem"
 import Skeleton from "@mui/material/Skeleton"
 import TextField from "@mui/material/TextField"
 
-import ResultsContext from "../../contexts/ResultsContext"
+import ResultsContext from "../../contexts/VideosContext"
 
 const _DownloadDialog = (
 	props: PropsWithChildren<{
-		time: number
-		video: iVideo | null
+		video: iVideo
 		open: boolean
 		setOpen: Dispatch<SetStateAction<boolean>>
 	}>
 ) => {
-	const { time, video, open, setOpen } = props
+	const { video, open, setOpen } = props
 
-	const { setResults } = useContext(ResultsContext)
+	const { setVideos } = useContext(ResultsContext)
 	const [errorText, setErrorText] = useState<string | null>(null)
 	const [filename, setFilename] = useState<string>("")
+	const [format, setFormat] = useState<"audioonly" | "videoandaudio">("audioonly")
 
 	const handleRemove = () => {
-		setResults(results => results.filter(s => s.time !== time))
+		setVideos(videos => videos.filter(v => v.uuid !== video.uuid))
 		setOpen(false)
 	}
 
@@ -40,10 +41,9 @@ const _DownloadDialog = (
 				.then(() => {
 					const url = new URL(`${window.location.origin}/api/download`)
 					url.searchParams.set("url", `https://youtu.be/${video.id}`)
-					url.searchParams.set("format", video.format)
+					url.searchParams.set("format", format)
 					url.searchParams.set("name", filename)
-					url.searchParams.set("bitrate", `${video.bitrate}`)
-					window.location.href = url.href
+					window.open(url.href)
 					setOpen(false)
 				})
 				.catch(err => setErrorText(err.response?.data?.message || err.message))
@@ -64,13 +64,24 @@ const _DownloadDialog = (
 		<Dialog open={open} onClose={handleDialogClose}>
 			<DialogTitle>
 				{video ? (
-					"Download MP" + (video.format === "audioonly" ? 3 : 4)
+					"Download MP" + (format === "audioonly" ? 3 : 4)
 				) : (
 					<Skeleton variant="text" />
 				)}
 			</DialogTitle>
 			<DialogContent>
-				<DialogContentText>
+				<TextField
+					sx={{ mt: 1 }}
+					id="type-select"
+					select
+					label="Type"
+					value={format}
+					fullWidth
+					onChange={e => setFormat(e.target.value as typeof format)}>
+					<MenuItem value="audioonly">Audio (MP3)</MenuItem>
+					<MenuItem value="videoandaudio">Video (MP4)</MenuItem>
+				</TextField>
+				<DialogContentText sx={{ mt: 2 }}>
 					Make sure the filename you type in here has no invalid characters
 				</DialogContentText>
 				<TextField
@@ -83,7 +94,7 @@ const _DownloadDialog = (
 						endAdornment: (
 							<InputAdornment position="end">
 								{video ? (
-									video.format === "audioonly" ? (
+									format === "audioonly" ? (
 										".mp3"
 									) : (
 										".mp4"

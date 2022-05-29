@@ -2,9 +2,7 @@ import { OBJECT, STRING } from "validate-any"
 
 import { Route } from "../../setup"
 
-export class POST extends Route<{
-	filename: string
-}> {
+export class POST extends Route<{ filename: string }> {
 	override bodyValidator = OBJECT({
 		filename: STRING()
 	})
