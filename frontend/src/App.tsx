@@ -47,7 +47,7 @@ const _App = () => {
 			<Container sx={{ my: 3 }}>
 				<TextField
 					sx={{ mt: 2 }}
-					label="Link"
+					label="Link to a youtube video or playlist"
 					variant="outlined"
 					value={text}
 					fullWidth
