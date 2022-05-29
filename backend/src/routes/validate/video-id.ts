@@ -1,17 +1,22 @@
-import ytdl from "ytdl-core"
-import { OBJECT, STRING, withValidBody } from "validate-any"
-import { Request, Response } from "express"
 import { useTryAsync } from "no-try"
+import { OBJECT, STRING } from "validate-any"
+import ytdl from "ytdl-core"
 
-export const POST = withValidBody(OBJECT({ url: STRING() }))<Request, Response>(
-	async (req, res) => {
-		const [err, info] = await useTryAsync(() => ytdl.getInfo(req.body.url))
+import { Route } from "../../setup"
+
+export class POST extends Route<{
+	url: string
+}> {
+	override bodyValidator = OBJECT({
+		url: STRING()
+	})
+
+	override async handle() {
+		const [err, info] = await useTryAsync(() => ytdl.getInfo(this.body.url))
 		if (err) {
-			res.status(400).send({
-				message: "Error getting video title, please enter a proper YouTube URL"
-			})
+			this.throw("Error getting video title, please enter a proper YouTube URL")
 		} else {
-			res.status(200).send({
+			this.res.status(200).send({
 				id: info.videoDetails.videoId,
 				name: info.videoDetails.title,
 				thumbnail: info.videoDetails.thumbnails.at(-1)?.url || "",
@@ -23,4 +28,4 @@ export const POST = withValidBody(OBJECT({ url: STRING() }))<Request, Response>(
 			})
 		}
 	}
-)
+}

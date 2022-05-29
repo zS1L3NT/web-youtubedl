@@ -1,22 +1,27 @@
-import { OBJECT, STRING, withValidBody } from "validate-any"
-import { Request, Response } from "express"
+import { OBJECT, STRING } from "validate-any"
 
-export const POST = withValidBody(OBJECT({ filename: STRING() }))<Request, Response>(
-	async (req, res) => {
-		if (req.body.filename === "") {
-			res.status(400).send({
-				message: "Filename cannot be empty"
-			})
+import { Route } from "../../setup"
+
+export class POST extends Route<{
+	filename: string
+}> {
+	override bodyValidator = OBJECT({
+		filename: STRING()
+	})
+
+	override async handle() {
+		if (this.body.filename === "") {
+			this.throw("Filename cannot be empty")
 		} else {
 			try {
-				res.setHeader(
+				this.res.setHeader(
 					"Content-Disposition",
-					`attachment; filename="${req.body.filename}.mp3"`
+					`attachment; filename="${this.body.filename}.mp3"`
 				)
-				res.status(200).end()
+				this.res.status(200).end()
 			} catch (e) {
-				res.status(400).send({ message: "Filename contains invalid characters" })
+				this.throw("Filename contains invalid characters")
 			}
 		}
 	}
-)
+}
