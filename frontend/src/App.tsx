@@ -60,7 +60,7 @@ const _App = () => {
 
 				<Stack>
 					<Button
-						sx={{ my: 2, mx: "auto" }}
+						sx={{ mt: 2, mx: "auto" }}
 						variant="contained"
 						onClick={handleConvert}
 						disabled={loading || text === ""}>
