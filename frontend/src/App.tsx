@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useContext, useState } from "react"
 
+import { CircularProgress } from "@mui/material"
 import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import CssBaseline from "@mui/material/CssBaseline"
@@ -18,6 +19,7 @@ import ResultsContext from "./contexts/VideosContext"
 const _App = () => {
 	const { setIsOpen, setMessage } = useContext(ErrorDialogContext)
 	const { setVideos, videos } = useContext(ResultsContext)
+	const [loading, setLoading] = useState(false)
 	const [text, setText] = useState("")
 
 	const handleConvert = async () => {
@@ -30,7 +32,12 @@ const _App = () => {
 				setIsOpen(true)
 				setMessage(err.response.data.message)
 			})
-		setText("")
+			.finally(() => {
+				setLoading(false)
+				setText("")
+			})
+
+		setLoading(true)
 	}
 
 	return (
@@ -44,11 +51,19 @@ const _App = () => {
 					variant="outlined"
 					value={text}
 					fullWidth
+					disabled={loading}
 					onChange={e => setText(e.target.value)}
+					InputProps={{
+						endAdornment: loading ? <CircularProgress size={24} /> : null
+					}}
 				/>
 
 				<Stack>
-					<Button sx={{ my: 2, mx: "auto" }} variant="contained" onClick={handleConvert}>
+					<Button
+						sx={{ my: 2, mx: "auto" }}
+						variant="contained"
+						onClick={handleConvert}
+						disabled={loading || text === ""}>
 						Convert
 					</Button>
 				</Stack>
