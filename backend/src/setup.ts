@@ -26,6 +26,17 @@ export abstract class Route<BV = any, QV = any> {
 			}
 		}
 
+		if (this.queryValidator) {
+			const { success, errors } = validate(this.req.query, this.queryValidator)
+			if (!success) {
+				this.res.status(400).send({
+					message: "Body Validation Errors",
+					errors
+				})
+				return
+			}
+		}
+
 		let handle = this.handle.bind(this)
 
 		for (const Middleware of this.middleware.reverse()) {
