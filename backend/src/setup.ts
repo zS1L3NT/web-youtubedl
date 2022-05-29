@@ -78,19 +78,11 @@ export abstract class Route<BV = any, QV = any> {
 	}
 
 	respond(data: any, status = 200) {
-		this.res.send({
-			data,
-			status
-		})
+		this.res.status(status).send(data)
 	}
 
 	throw(message: string, status = 400) {
-		this.res.send({
-			data: {
-				message
-			},
-			status
-		})
+		this.res.status(status).send({ message })
 	}
 
 	redirect(url: string) {

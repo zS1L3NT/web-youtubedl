@@ -37,6 +37,7 @@ specifiers:
   workbox-strategies: ^6.5.1
   workbox-window: ^6.5.1
   ytdl-core: ^4.11.0
+  ytpl: ^2.3.0
 
 dependencies:
   '@babel/core': 7.18.2
@@ -59,6 +60,7 @@ dependencies:
   tracer: 1.1.5
   validate-any: 1.2.4
   ytdl-core: 4.11.0
+  ytpl: 2.3.0
 
 devDependencies:
   '@types/cors': 2.8.12
@@ -4217,4 +4219,11 @@ packages:
       m3u8stream: 0.8.6
       miniget: 4.2.2
       sax: 1.2.4
+    dev: false
+
+  /ytpl/2.3.0:
+    resolution: {integrity: sha512-Cfw2rxq3PFK6qgWr2Z8gsRefVahEzbn9XEuiJldqdXHE6GhO7kTfEvbZKdfXing1SmgW635uJ/UL2g8r0fvu2Q==}
+    engines: {node: '>=8'}
+    dependencies:
+      miniget: 4.2.2
     dev: false

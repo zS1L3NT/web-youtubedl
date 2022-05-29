@@ -11,18 +11,23 @@ export class GET extends Route<
 		url: string
 		format: "videoandaudio" | "audioonly"
 		name: string
-		bitrate: string
 	}
 > {
 	override queryValidator = OBJECT({
 		url: STRING(),
 		format: STRING("videoandaudio", "audioonly"),
-		name: STRING(),
-		bitrate: STRING()
+		name: STRING()
 	})
 
 	override async handle() {
-		const { url, format, name, bitrate } = this.query
+		const { url, format, name } = this.query
+
+		const bitrate =
+			(await ytdl.getBasicInfo(url)).formats
+				.map(f => f.audioBitrate)
+				.filter(f => !!f)
+				.sort((a, b) => b! - a!)[0] || 160
+
 		const stream = ytdl(url, {
 			filter: format,
 			quality: "highest"
