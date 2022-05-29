@@ -28,7 +28,7 @@ export class POST extends Route<{ text: string }> {
 					id: item.id,
 					name: item.title,
 					channel: item.author.name,
-					thumbnail: item.thumbnails.at(-1)?.url || ""
+					thumbnail: item.thumbnails.at(0)?.url || ""
 				}))
 			)
 			return
@@ -41,7 +41,7 @@ export class POST extends Route<{ text: string }> {
 					id: videoInfo.videoDetails.videoId,
 					name: videoInfo.videoDetails.title,
 					channel: videoInfo.videoDetails.author.name,
-					thumbnail: videoInfo.videoDetails.thumbnails.at(-1)?.url || ""
+					thumbnail: videoInfo.videoDetails.thumbnails.at(0)?.url || ""
 				}
 			])
 			return
