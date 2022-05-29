@@ -29,8 +29,7 @@ $ npm run dev
     -   TypeScript
         -   [![@types/express](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/express?style=flat-square)](https://npmjs.com/package/@types/express)
         -   [![@types/fluent-ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/fluent-ffmpeg?style=flat-square)](https://npmjs.com/package/@types/fluent-ffmpeg)
-        -   [![@types/luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/luxon?style=flat-square)](https://npmjs.com/package/@types/luxon)
-        -   [![@types/morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/@types/morgan?style=flat-square)](https://npmjs.com/package/@types/morgan)
+        -   [![@types/uuid](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@types/uuid?style=flat-square)](https://npmjs.com/package/@types/uuid)
         -   [![typescript](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dev/typescript?style=flat-square)](https://npmjs.com/package/typescript)
     -   FFmpeg & YTDL
         -   [![@ffmpeg-installer/ffmpeg](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/@ffmpeg-installer/ffmpeg?style=flat-square)](https://npmjs.com/package/@ffmpeg-installer/ffmpeg)
@@ -41,10 +40,9 @@ $ npm run dev
     -   Miscellaneous
         -   [![colors](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/colors?style=flat-square)](https://npmjs.com/package/colors)
         -   [![dotenv](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/dotenv?style=flat-square)](https://npmjs.com/package/dotenv)
-        -   [![luxon](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/luxon?style=flat-square)](https://npmjs.com/package/luxon)
-        -   [![morgan](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/morgan?style=flat-square)](https://npmjs.com/package/morgan)
         -   [![no-try](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/no-try?style=flat-square)](https://npmjs.com/package/no-try)
         -   [![tracer](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/tracer?style=flat-square)](https://npmjs.com/package/tracer)
+        -   [![uuid](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/uuid?style=flat-square)](https://npmjs.com/package/uuid)
         -   [![validate-any](https://img.shields.io/github/package-json/dependency-version/zS1L3NT/web-youtubedl/validate-any?style=flat-square)](https://npmjs.com/package/validate-any)
 -   Frontend
     -   TypeScript
