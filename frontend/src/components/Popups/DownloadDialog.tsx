@@ -29,8 +29,7 @@ const _DownloadDialog = (
 	const [filename, setFilename] = useState<string>("")
 	const [format, setFormat] = useState<"audioonly" | "videoandaudio">("audioonly")
 
-	const handleRemove = () => {
-		setVideos(videos => videos.filter(v => v.uuid !== video.uuid))
+	const handleClose = () => {
 		setOpen(false)
 	}
 
@@ -45,6 +44,7 @@ const _DownloadDialog = (
 					url.searchParams.set("name", filename)
 					window.open(url.href)
 					setOpen(false)
+					setVideos(videos => videos.filter(v => v.uuid !== video.uuid))
 				})
 				.catch(err => setErrorText(err.response?.data?.message || err.message))
 		}
@@ -111,8 +111,8 @@ const _DownloadDialog = (
 				{errorText && <Alert severity="error">{errorText}</Alert>}
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={handleRemove}>Remove</Button>
-				<Button onClick={handleDownload} disabled={!video}>
+				<Button onClick={handleClose}>Close</Button>
+				<Button variant="contained" onClick={handleDownload} disabled={!video}>
 					Download
 				</Button>
 			</DialogActions>
