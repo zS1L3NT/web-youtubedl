@@ -10,7 +10,7 @@ import App from "./App"
 import ContextProviders from "./contexts/ContextProviders"
 import theme from "./theme"
 
-axios.defaults.baseURL = "http://youtubedl.zectan.com"
+// axios.defaults.baseURL = "localhost:8080"
 
 ReactDOM.hydrate(
 	<StrictMode>
