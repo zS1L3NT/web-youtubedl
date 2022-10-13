@@ -10,7 +10,7 @@ import { iRoute } from "./setup"
 dotenv.config()
 ffmpeg.setFfmpegPath(require("@ffmpeg-installer/ffmpeg").path)
 
-const PORT = process.env.PORT || 1902
+const PORT = process.env.PORT || 8080
 const app = express()
 
 if (process.env.NODE_ENV !== "production") {
