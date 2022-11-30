@@ -20,6 +20,6 @@ export default Tracer.colorConsole({
 			.replaceAll("\\", "/")
 			.split("web-youtubedl")
 			.at(-1)!
-			.replace(/\/app\/backend\/(src|dist)/, "src")
+			.replace(/\/web-express-youtubedl\/(src|dist)/, "src")
 	}
 })

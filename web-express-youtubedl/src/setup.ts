@@ -15,7 +15,7 @@ export abstract class Route<BV = any, QV = any> {
 		queue.push(queue.length === 0 ? 1 : queue.at(-1)! + 1)
 		const rid = `{#${queue.at(-1)!}}`
 
-		logger.http!(`Opening ${rid}`, this.req.method, this.req.url, this.req.body)
+		logger.http(`Opening ${rid}`, this.req.method, this.req.url, this.req.body)
 
 		if (this.bodyValidator) {
 			const { success, errors } = validate(this.req.body, this.bodyValidator)
@@ -53,7 +53,7 @@ export abstract class Route<BV = any, QV = any> {
 			.finally(() => {
 				setTimeout(() => queue.splice(queue.indexOf(+rid.slice(2, -1)), 1), 60_000)
 
-				logger.http!(`Closing ${rid}`, this.req.method, this.req.url, this.req.body)
+				logger.http(`Closing ${rid}`, this.req.method, this.req.url, this.req.body)
 			})
 	}
 

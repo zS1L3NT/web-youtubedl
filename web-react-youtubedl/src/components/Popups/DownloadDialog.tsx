@@ -38,7 +38,11 @@ const _DownloadDialog = (
 			axios
 				.post(`/api/validate/filename`, { filename })
 				.then(() => {
-					const url = new URL(`${window.location.origin}/api/download`)
+					const url = new URL(
+						`${
+							import.meta.env.DEV ? "http://localhost:8080" : window.location.origin
+						}/api/download`
+					)
 					url.searchParams.set("url", `https://youtu.be/${video.id}`)
 					url.searchParams.set("format", format)
 					url.searchParams.set("name", filename)

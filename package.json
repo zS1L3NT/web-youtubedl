@@ -1,46 +1,7 @@
 {
 	"scripts": {
-		"start": "node backend/dist/app.js",
-		"dev": "concurrently \"cd backend && ts-node --files src/app.ts\" \"cd frontend && vite\"",
-		"build": "cd frontend && tsc && vite build && cd ../backend && tsc"
-	},
-	"dependencies": {
-		"@babel/core": "^7.18.2",
-		"@emotion/react": "^11.8.2",
-		"@emotion/styled": "^11.8.1",
-		"@ffmpeg-installer/ffmpeg": "^1.1.0",
-		"@mui/icons-material": "^5.5.1",
-		"@mui/material": "^5.5.2",
-		"axios": "^0.26.1",
-		"colors": "^1.4.0",
-		"cors": "^2.8.5",
-		"dotenv": "^16.0.0",
-		"express": "^4.17.3",
-		"fluent-ffmpeg": "^2.1.2",
-		"no-try": "^3.1.0",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"tracer": "^1.1.5",
-		"uuid": "^8.3.2",
-		"validate-any": "1.2.4",
-		"ytdl-core": "^4.11.2",
-		"ytpl": "^2.3.0"
-	},
-	"devDependencies": {
-		"@types/cors": "^2.8.12",
-		"@types/express": "^4.17.13",
-		"@types/fluent-ffmpeg": "^2.1.20",
-		"@types/react": "^17.0.41",
-		"@types/react-dom": "^17.0.14",
-		"@types/uuid": "^8.3.4",
-		"@vitejs/plugin-react": "^1.2.0",
-		"typescript": "^4.6.2",
-		"vite": "^2.8.6",
-		"vite-plugin-pwa": "^0.11.13",
-		"workbox-build": "^6.5.1",
-		"workbox-core": "^6.5.1",
-		"workbox-routing": "^6.5.1",
-		"workbox-strategies": "^6.5.1",
-		"workbox-window": "^6.5.1"
+		"start": "node web-express-youtubedl/dist/app.js",
+		"dev": "pnpx concurrently \"cd web-express-youtubedl && pnpm dev\" \"cd web-react-youtubedl && pnpm dev\"",
+		"build": "cd web-react-youtubedl && tsc && vite build && cd ../web-express-youtubedl && tsc"
 	}
 }

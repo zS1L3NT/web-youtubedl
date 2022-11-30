@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 app.use(express.json())
-app.use(express.static(path.join(__dirname, "../../frontend/dist")))
+app.use(express.static(path.join(__dirname, "../../web-react-youtubedl/dist")))
 
 const readRouteFolder = (folderName: string) => {
 	const folderPath = path.join(__dirname, "routes", folderName)

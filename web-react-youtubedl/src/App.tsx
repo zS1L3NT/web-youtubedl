@@ -29,6 +29,7 @@ const _App = () => {
 				setVideos(videos => [...videos, ...res.data])
 			})
 			.catch(err => {
+				console.error(err)
 				setIsOpen(true)
 				setMessage(err.response.data.message)
 			})
