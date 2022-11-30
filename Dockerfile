@@ -5,8 +5,10 @@ WORKDIR /home/web-youtubedl
 COPY . .
 
 RUN npm i -g pnpm
-RUN pnpm i
-RUN pnpm build
+RUN cd web-express-youtubedl && pnpm i
+RUN cd web-express-youtubedl && pnpm build
+RUN cd web-react-youtubedl && pnpm i
+RUN cd web-react-youtubedl && pnpm build
 
 EXPOSE 8080
 CMD ["pnpm", "start"]
