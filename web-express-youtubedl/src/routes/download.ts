@@ -1,6 +1,6 @@
 import ffmpeg from "fluent-ffmpeg"
-import { OBJECT, STRING } from "validate-any"
 import ytdl from "ytdl-core"
+import { type } from "arktype"
 
 import logger from "../logger"
 import { Route } from "../setup"
@@ -13,10 +13,10 @@ export class GET extends Route<
 		name: string
 	}
 > {
-	override queryValidator = OBJECT({
-		url: STRING(),
-		format: STRING("videoandaudio", "audioonly"),
-		name: STRING()
+	override queryValidator = type({
+		url: "string",
+		format: '"videoandaudio" | "audioonly"',
+		name: "string"
 	})
 
 	override async handle() {

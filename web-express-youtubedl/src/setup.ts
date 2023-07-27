@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express"
-import { validate } from "validate-any"
-import Validator from "validate-any/dist/classes/Validator"
+import { Type } from "arktype"
 
 import logger from "./logger"
 
@@ -18,22 +17,22 @@ export abstract class Route<BV = any, QV = any> {
 		logger.http(`Opening ${rid}`, this.req.method, this.req.url, this.req.body)
 
 		if (this.bodyValidator) {
-			const { success, errors } = validate(this.req.body, this.bodyValidator)
-			if (!success) {
+			const result = this.bodyValidator(this.req.body)
+			if (result.problems) {
 				this.res.status(400).send({
 					message: "Body Validation Errors",
-					errors
+					errors: result.problems
 				})
 				return
 			}
 		}
 
 		if (this.queryValidator) {
-			const { success, errors } = validate(this.req.query, this.queryValidator)
-			if (!success) {
+			const result = this.queryValidator(this.req.query)
+			if (result.problems) {
 				this.res.status(400).send({
 					message: "Body Validation Errors",
-					errors
+					errors: result.problems
 				})
 				return
 			}
@@ -57,9 +56,9 @@ export abstract class Route<BV = any, QV = any> {
 			})
 	}
 
-	bodyValidator: Validator<BV> | undefined
+	bodyValidator: Type<BV> | undefined
 
-	queryValidator: Validator<QV> | undefined
+	queryValidator: Type<QV> | undefined
 
 	middleware: iMiddleware[] = []
 

@@ -1,11 +1,8 @@
-import { OBJECT, STRING } from "validate-any"
-
 import { Route } from "../../setup"
+import { type } from "arktype"
 
 export class POST extends Route<{ filename: string }> {
-	override bodyValidator = OBJECT({
-		filename: STRING()
-	})
+	override bodyValidator = type({ filename: "string" })
 
 	override async handle() {
 		if (this.body.filename === "") {

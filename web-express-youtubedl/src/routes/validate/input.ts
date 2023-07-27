@@ -1,15 +1,13 @@
 import { useTryAsync } from "no-try"
 import { v4 } from "uuid"
-import { OBJECT, STRING } from "validate-any"
 import ytdl from "ytdl-core"
 import ytpl from "ytpl"
+import { type } from "arktype"
 
 import { Route } from "../../setup"
 
 export class POST extends Route<{ text: string }> {
-	override bodyValidator = OBJECT({
-		text: STRING()
-	})
+	override bodyValidator = type({ text: "string" })
 
 	override async handle() {
 		const [[videoErr, videoInfo], [playlistErr, playlistInfo]] = await Promise.all([
