@@ -2,7 +2,7 @@ import "./index.css"
 
 import axios from "axios"
 import { StrictMode } from "react"
-import { render } from "react-dom"
+import { createRoot } from "react-dom/client"
 
 import { ThemeProvider } from "@mui/material"
 
@@ -14,13 +14,12 @@ if (import.meta.env.DEV) {
 	axios.defaults.baseURL = "http://localhost:8080"
 }
 
-render(
+createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<ThemeProvider theme={theme}>
 			<ContextProviders>
 				<App />
 			</ContextProviders>
 		</ThemeProvider>
-	</StrictMode>,
-	document.getElementById("root")
+	</StrictMode>
 )
