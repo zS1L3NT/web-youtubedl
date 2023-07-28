@@ -1,11 +1,9 @@
 import { createContext, Dispatch, SetStateAction } from "react"
 
-interface iVideosData {
+export default createContext<{
 	videos: iVideo[]
 	setVideos: Dispatch<SetStateAction<iVideo[]>>
-}
-
-export default createContext<iVideosData>({
+}>({
 	videos: [],
 	setVideos: () => {}
 })

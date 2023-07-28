@@ -1,22 +1,14 @@
 import axios from "axios"
 import { useContext, useState } from "react"
 
-import { CircularProgress } from "@mui/material"
-import Button from "@mui/material/Button"
-import Container from "@mui/material/Container"
-import CssBaseline from "@mui/material/CssBaseline"
-import Grid from "@mui/material/Grid"
-import Stack from "@mui/material/Stack"
-import TextField from "@mui/material/TextField"
+import { Stack, TextInput, Button, Grid } from "@mantine/core"
 
-import Navigator from "./components/Navigator"
 import ErrorDialog from "./components/Popups/ErrorDialog"
-import PWASnackbar from "./components/Popups/PWASnackbar"
 import VideoGridItem from "./components/VideoGridItem"
 import ErrorDialogContext from "./contexts/ErrorDialogContext"
 import ResultsContext from "./contexts/VideosContext"
 
-const _App = () => {
+const App = () => {
 	const { setIsOpen, setMessage } = useContext(ErrorDialogContext)
 	const { setVideos, videos } = useContext(ResultsContext)
 	const [loading, setLoading] = useState(false)
@@ -43,42 +35,32 @@ const _App = () => {
 
 	return (
 		<>
-			<CssBaseline />
-			<Navigator />
-			<Container sx={{ my: 3 }}>
-				<TextField
-					sx={{ mt: 2 }}
-					label="Link to a youtube video or playlist"
-					variant="outlined"
+			<Stack my="md" px="md">
+				<TextInput
+					label="YouTube Link"
+					placeholder="Link to a youtube video or playlist"
 					value={text}
-					fullWidth
 					disabled={loading}
 					onChange={e => setText(e.target.value)}
-					InputProps={{
-						endAdornment: loading ? <CircularProgress size={24} /> : null
-					}}
 				/>
 
-				<Stack>
-					<Button
-						sx={{ mt: 2, mx: "auto" }}
-						variant="contained"
-						onClick={handleConvert}
-						disabled={loading || text === ""}>
-						Convert
-					</Button>
-				</Stack>
+				<Button
+					w="fit-content"
+					mx="auto"
+					onClick={handleConvert}
+					disabled={loading || text === ""}>
+					Convert
+				</Button>
 
-				<Grid sx={{ mt: 3, pb: 3 }} container justifyContent="space-evenly" spacing={2}>
+				<Grid>
 					{videos.map(video => (
 						<VideoGridItem key={video.uuid} video={video} />
 					))}
 				</Grid>
-			</Container>
+			</Stack>
 			<ErrorDialog />
-			<PWASnackbar />
 		</>
 	)
 }
 
-export default _App
+export default App

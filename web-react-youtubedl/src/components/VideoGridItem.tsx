@@ -1,47 +1,37 @@
 import { PropsWithChildren, useState } from "react"
 
-import { CardHeader } from "@mui/material"
-import Card from "@mui/material/Card"
-import CardActionArea from "@mui/material/CardActionArea"
-import CardMedia from "@mui/material/CardMedia"
-import Grid from "@mui/material/Grid"
+import { Grid, Paper, Card, Image, Text } from "@mantine/core"
 
-import DownloadDialog from "./Popups/DownloadDialog"
+import DownloadModal from "./Popups/DownloadModal"
 
-const _VideoGridItem = (
-	props: PropsWithChildren<{
-		video: iVideo
-	}>
-): JSX.Element => {
-	const { video } = props
-
+const VideoGridItem = ({ video }: { video: iVideo }): JSX.Element => {
 	const [dialogOpen, setDialogOpen] = useState(false)
 
 	return (
 		<>
-			<Grid sx={{ width: 400 }} item>
-				<Card onClick={() => setDialogOpen(true)}>
-					<CardActionArea>
-						<CardHeader
-							title={video.name}
-							titleTypographyProps={{ variant: "h6" }}
-							subheader={video.channel}
-						/>
-						<CardMedia
-							sx={{
-								width: "100%",
-								aspectRatio: "16/9"
-							}}
-							component="img"
-							image={video.thumbnail}
+			<Grid.Col span={12} sm={6} lg={4}>
+				<Card
+					onClick={() => setDialogOpen(true)}
+					sx={{ cursor: "pointer" }}
+					shadow="sm"
+					withBorder>
+					<Card.Section>
+						<Image
+							sx={{ aspectRatio: "16/9" }}
+							width="100%"
+							src={video.thumbnail}
 							alt="Thumbnail"
 						/>
-					</CardActionArea>
+					</Card.Section>
+					<Text weight={700} size="lg" mt="sm">
+						{video.name}
+					</Text>
+					<Text color="dimmed">{video.channel}</Text>
 				</Card>
-			</Grid>
-			<DownloadDialog video={video} open={dialogOpen} setOpen={setDialogOpen} />
+			</Grid.Col>
+			<DownloadModal video={video} open={dialogOpen} setOpen={setDialogOpen} />
 		</>
 	)
 }
 
-export default _VideoGridItem
+export default VideoGridItem
