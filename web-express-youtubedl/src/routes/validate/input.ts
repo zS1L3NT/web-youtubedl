@@ -5,6 +5,7 @@ import ytpl from "ytpl"
 import { type } from "arktype"
 
 import { Route } from "../../setup"
+import ytmusic from "../../ytmusic"
 
 export class POST extends Route<{ text: string }> {
 	override bodyValidator = type({ text: "string" })
@@ -21,13 +22,18 @@ export class POST extends Route<{ text: string }> {
 
 		if (playlistInfo) {
 			this.respond(
-				playlistInfo.items.map(item => ({
-					uuid: v4(),
-					id: item.id,
-					name: item.title,
-					channel: item.author.name,
-					thumbnail: item.thumbnails.at(0)?.url || ""
-				}))
+				await Promise.all(
+					playlistInfo.items.map(async item => ({
+						uuid: v4(),
+						id: item.id,
+						video: {
+							name: item.title,
+							channel: item.author.name,
+							thumbnail: item.thumbnails.at(-1)?.url || "",
+						},
+						song: await this.getSongData(item.id)
+					}))
+				)
 			)
 			return
 		}
@@ -37,12 +43,23 @@ export class POST extends Route<{ text: string }> {
 				{
 					uuid: v4(),
 					id: videoInfo.videoDetails.videoId,
-					name: videoInfo.videoDetails.title,
-					channel: videoInfo.videoDetails.author.name,
-					thumbnail: videoInfo.videoDetails.thumbnails.at(0)?.url || ""
+					video: {
+						name: videoInfo.videoDetails.title,
+						channel: videoInfo.videoDetails.author.name,
+						thumbnail: videoInfo.videoDetails.thumbnails.at(-1)?.url || "",
+					},
+					song: await this.getSongData(videoInfo.videoDetails.videoId)
 				}
 			])
 			return
 		}
+	}
+
+	getSongData(videoId: string) {
+		return ytmusic.getSong(videoId).then(song => ({
+			title: song.name,
+			artists: song.artists.map(artist => artist.name).join(", "),
+			thumbnail: song.thumbnails.at(-1)?.url || ""
+		}))
 	}
 }

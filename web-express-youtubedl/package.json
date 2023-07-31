@@ -20,6 +20,7 @@
 		"tracer": "^1.1.6",
 		"uuid": "^9.0.0",
 		"ytdl-core": "^4.11.2",
+		"ytmusic-api": "^4.2.0",
 		"ytpl": "^2.3.0"
 	},
 	"devDependencies": {

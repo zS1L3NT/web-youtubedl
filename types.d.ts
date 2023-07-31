@@ -1,7 +1,15 @@
 type iVideo = {
 	uuid: string
 	id: string
-	name: string
-	channel: string
-	thumbnail: string
+	video: {
+		name: string
+		channel: string
+		thumbnail: string
+	}
+	song: {
+		title: string
+		artists: string
+		album: string
+		thumbnail: string
+	}
 }
