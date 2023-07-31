@@ -4,6 +4,7 @@ import express from "express"
 import ffmpeg from "fluent-ffmpeg"
 import fs from "fs"
 import path from "path"
+
 import ffmpegInstaller from "@ffmpeg-installer/ffmpeg"
 
 import { iRoute } from "./setup.js"
@@ -34,7 +35,7 @@ const readRouteFolder = async (folderName: string) => {
 			for (const [method, Route] of Object.entries(file)) {
 				app[method.toLowerCase() as "get" | "post" | "put" | "delete"](
 					"/api" + pathName.replace(/\[(\w+)\]/g, ":$1"),
-					(req, res) => new Route(req, res).setup()
+					(req, res) => new Route(req, res).setup(),
 				)
 			}
 		} else {

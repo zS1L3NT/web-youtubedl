@@ -1,8 +1,8 @@
+import { type } from "arktype"
 import { useTryAsync } from "no-try"
 import { v4 } from "uuid"
 import ytdl from "ytdl-core"
 import ytpl from "ytpl"
-import { type } from "arktype"
 
 import { Route } from "../../setup.js"
 import ytmusic from "../../ytmusic.js"
@@ -13,7 +13,7 @@ export class POST extends Route<{ text: string }> {
 	override async handle() {
 		const [[videoErr, videoInfo], [playlistErr, playlistInfo]] = await Promise.all([
 			useTryAsync(() => ytdl.getInfo(this.body.text)),
-			useTryAsync(() => ytpl(this.body.text))
+			useTryAsync(() => ytpl(this.body.text)),
 		])
 
 		if (videoErr && playlistErr) {
@@ -31,9 +31,9 @@ export class POST extends Route<{ text: string }> {
 							channel: item.author.name,
 							thumbnail: item.thumbnails.at(-1)?.url || "",
 						},
-						song: await this.getSongData(item.id)
-					}))
-				)
+						song: await this.getSongData(item.id),
+					})),
+				),
 			)
 			return
 		}
@@ -48,8 +48,8 @@ export class POST extends Route<{ text: string }> {
 						channel: videoInfo.videoDetails.author.name,
 						thumbnail: videoInfo.videoDetails.thumbnails.at(-1)?.url || "",
 					},
-					song: await this.getSongData(videoInfo.videoDetails.videoId)
-				}
+					song: await this.getSongData(videoInfo.videoDetails.videoId),
+				},
 			])
 			return
 		}
@@ -59,7 +59,7 @@ export class POST extends Route<{ text: string }> {
 		return ytmusic.getSong(videoId).then(song => ({
 			title: song.name,
 			artists: song.artists.map(artist => artist.name).join(", "),
-			thumbnail: song.thumbnails.at(-1)?.url || ""
+			thumbnail: song.thumbnails.at(-1)?.url || "",
 		}))
 	}
 }

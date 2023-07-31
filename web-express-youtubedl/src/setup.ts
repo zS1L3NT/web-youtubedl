@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express"
 import { Type } from "arktype"
+import { NextFunction, Request, Response } from "express"
 
 import logger from "./logger.js"
 
@@ -8,7 +8,10 @@ const queue: number[] = []
 export type iRoute = new (req: Request, res: Response) => Route
 
 export abstract class Route<BV = any, QV = any> {
-	constructor(protected readonly req: Request, protected readonly res: Response) {}
+	constructor(
+		protected readonly req: Request,
+		protected readonly res: Response,
+	) {}
 
 	setup() {
 		queue.push(queue.length === 0 ? 1 : queue.at(-1)! + 1)
@@ -21,7 +24,7 @@ export abstract class Route<BV = any, QV = any> {
 			if (result.problems) {
 				this.res.status(400).send({
 					message: "Body Validation Errors",
-					errors: result.problems
+					errors: result.problems,
 				})
 				return
 			}
@@ -32,7 +35,7 @@ export abstract class Route<BV = any, QV = any> {
 			if (result.problems) {
 				this.res.status(400).send({
 					message: "Body Validation Errors",
-					errors: result.problems
+					errors: result.problems,
 				})
 				return
 			}
@@ -92,23 +95,26 @@ export abstract class Route<BV = any, QV = any> {
 export type iMiddleware = new (req: Request, res: Response) => Middleware
 
 export abstract class Middleware {
-	constructor(protected readonly req: Request, protected readonly res: Response) {}
+	constructor(
+		protected readonly req: Request,
+		protected readonly res: Response,
+	) {}
 
 	abstract handle(next: NextFunction): Promise<void>
 
 	respond(data: any, status = 200) {
 		this.res.send({
 			data,
-			status
+			status,
 		})
 	}
 
 	throw(message: string, status = 400) {
 		this.res.send({
 			data: {
-				message
+				message,
 			},
-			status
+			status,
 		})
 	}
 

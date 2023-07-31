@@ -1,5 +1,6 @@
-import { Route } from "../../setup.js"
 import { type } from "arktype"
+
+import { Route } from "../../setup.js"
 
 export class POST extends Route<{ filename: string }> {
 	override bodyValidator = type({ filename: "string" })
@@ -11,7 +12,7 @@ export class POST extends Route<{ filename: string }> {
 			try {
 				this.res.setHeader(
 					"Content-Disposition",
-					`attachment; filename="${this.body.filename}.mp3"`
+					`attachment; filename="${this.body.filename}.mp3"`,
 				)
 				this.res.status(200).end()
 			} catch (e) {

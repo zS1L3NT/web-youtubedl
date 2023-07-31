@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useContext, useState } from "react"
 
-import { Stack, TextInput, Button, Grid } from "@mantine/core"
+import { Button, Grid, Stack, TextInput } from "@mantine/core"
 
 import ErrorDialog from "./components/Popups/ErrorDialog"
 import VideoGridItem from "./components/VideoGridItem"
@@ -35,7 +35,9 @@ const App = () => {
 
 	return (
 		<>
-			<Stack my="md" px="md">
+			<Stack
+				my="md"
+				px="md">
 				<TextInput
 					label="YouTube Link"
 					placeholder="Link to a youtube video or playlist"
@@ -54,7 +56,10 @@ const App = () => {
 
 				<Grid>
 					{videos.map(video => (
-						<VideoGridItem key={video.uuid} video={video} />
+						<VideoGridItem
+							key={video.uuid}
+							video={video}
+						/>
 					))}
 				</Grid>
 			</Stack>

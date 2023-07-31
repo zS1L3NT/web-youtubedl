@@ -1,6 +1,6 @@
+import { type } from "arktype"
 import ffmpeg from "fluent-ffmpeg"
 import ytdl from "ytdl-core"
-import { type } from "arktype"
 
 import logger from "../logger.js"
 import { Route } from "../setup.js"
@@ -16,7 +16,7 @@ export class GET extends Route<
 	override queryValidator = type({
 		url: "string",
 		format: '"videoandaudio" | "audioonly"',
-		name: "string"
+		name: "string",
 	})
 
 	override async handle() {
@@ -30,12 +30,12 @@ export class GET extends Route<
 
 		const stream = ytdl(url, {
 			filter: format,
-			quality: "highest"
+			quality: "highest",
 		})
 
 		this.res.setHeader(
 			"Content-Disposition",
-			`attachment; filename="${name}.${format === "audioonly" ? "mp3" : "mp4"}"`
+			`attachment; filename="${name}.${format === "audioonly" ? "mp3" : "mp4"}"`,
 		)
 
 		if (format === "videoandaudio") {

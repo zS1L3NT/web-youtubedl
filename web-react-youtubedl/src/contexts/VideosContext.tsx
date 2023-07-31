@@ -5,5 +5,5 @@ export default createContext<{
 	setVideos: Dispatch<SetStateAction<iVideo[]>>
 }>({
 	videos: [],
-	setVideos: () => {}
+	setVideos: () => {},
 })

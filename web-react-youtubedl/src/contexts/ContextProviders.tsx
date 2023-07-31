@@ -14,7 +14,7 @@ const ContextProviders = ({ children }: PropsWithChildren) => {
 				isOpen,
 				text,
 				setIsOpen,
-				setMessage: setText
+				setMessage: setText,
 			}}>
 			<ResultsContext.Provider value={{ videos, setVideos }}>
 				{children}

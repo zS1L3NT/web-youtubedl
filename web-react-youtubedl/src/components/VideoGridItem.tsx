@@ -1,6 +1,6 @@
-import { PropsWithChildren, useState } from "react"
+import { useState } from "react"
 
-import { Grid, Paper, Card, Image, Text } from "@mantine/core"
+import { Card, Grid, Image, Text } from "@mantine/core"
 
 import DownloadModal from "./Popups/DownloadModal"
 
@@ -9,7 +9,10 @@ const VideoGridItem = ({ video }: { video: iVideo }): JSX.Element => {
 
 	return (
 		<>
-			<Grid.Col span={12} sm={6} lg={4}>
+			<Grid.Col
+				span={12}
+				sm={6}
+				lg={4}>
 				<Card
 					onClick={() => setDialogOpen(true)}
 					sx={{ cursor: "pointer" }}
@@ -19,17 +22,24 @@ const VideoGridItem = ({ video }: { video: iVideo }): JSX.Element => {
 						<Image
 							sx={{ aspectRatio: "16/9" }}
 							width="100%"
-							src={video.thumbnail}
+							src={video.video.thumbnail}
 							alt="Thumbnail"
 						/>
 					</Card.Section>
-					<Text weight={700} size="lg" mt="sm">
-						{video.name}
+					<Text
+						weight={700}
+						size="lg"
+						mt="sm">
+						{video.video.name}
 					</Text>
-					<Text color="dimmed">{video.channel}</Text>
+					<Text color="dimmed">{video.video.channel}</Text>
 				</Card>
 			</Grid.Col>
-			<DownloadModal video={video} open={dialogOpen} setOpen={setDialogOpen} />
+			<DownloadModal
+				video={video}
+				open={dialogOpen}
+				setOpen={setDialogOpen}
+			/>
 		</>
 	)
 }

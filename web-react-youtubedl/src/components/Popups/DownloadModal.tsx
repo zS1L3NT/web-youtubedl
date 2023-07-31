@@ -1,15 +1,16 @@
 import axios from "axios"
 import { Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from "react"
-import { Text, Select, TextInput, Modal, Button, Alert, Flex, Stack } from "@mantine/core"
-import { IconAlertCircle } from "@tabler/icons-react"
+
+import { Alert, Button, Flex, Modal, Select, Stack, Text, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
+import { IconAlertCircle } from "@tabler/icons-react"
 
 import ResultsContext from "../../contexts/VideosContext"
 
 const DownloadModal = ({
 	video,
 	open,
-	setOpen
+	setOpen,
 }: PropsWithChildren<{
 	video: iVideo
 	open: boolean
@@ -21,11 +22,11 @@ const DownloadModal = ({
 	const form = useForm({
 		initialValues: {
 			filename: "",
-			format: "audioonly"
+			format: "audioonly",
 		},
 		validate: {
-			filename: value => (value ? null : "Filename cannot be empty")
-		}
+			filename: value => (value ? null : "Filename cannot be empty"),
+		},
 	})
 
 	const onSubmit = form.onSubmit(({ filename, format }) => {
@@ -35,7 +36,7 @@ const DownloadModal = ({
 				const url = new URL(
 					`${
 						import.meta.env.DEV ? "http://localhost:8080" : window.location.origin
-					}/api/download`
+					}/api/download`,
 				)
 				url.searchParams.set("url", `https://youtu.be/${video.id}`)
 				url.searchParams.set("format", format)
@@ -60,7 +61,7 @@ const DownloadModal = ({
 						label="Type"
 						data={[
 							{ value: "audioonly", label: "Audio (MP3)" },
-							{ value: "videoandaudio", label: "Video (MP4)" }
+							{ value: "videoandaudio", label: "Video (MP4)" },
 						]}
 						{...form.getInputProps("format")}
 					/>
@@ -76,17 +77,24 @@ const DownloadModal = ({
 					/>
 
 					{error && (
-						<Alert icon={<IconAlertCircle size="1rem" />} title="Bummer!" color="red">
+						<Alert
+							icon={<IconAlertCircle size="1rem" />}
+							title="Bummer!"
+							color="red">
 							Something terrible happened! You made a mistake and there is no going
 							back, your data was lost forever!
 						</Alert>
 					)}
 
 					<Flex gap="md">
-						<Button type="submit" disabled={!video}>
+						<Button
+							type="submit"
+							disabled={!video}>
 							Download
 						</Button>
-						<Button variant="light" onClick={() => setOpen(false)}>
+						<Button
+							variant="light"
+							onClick={() => setOpen(false)}>
 							Close
 						</Button>
 					</Flex>

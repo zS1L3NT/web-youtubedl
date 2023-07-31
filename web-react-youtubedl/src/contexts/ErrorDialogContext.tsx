@@ -9,5 +9,5 @@ export default createContext<{
 	isOpen: false,
 	text: "",
 	setIsOpen: () => {},
-	setMessage: () => {}
+	setMessage: () => {},
 })
