@@ -1,4 +1,4 @@
-import { Route } from "../../setup"
+import { Route } from "../../setup.js"
 import { type } from "arktype"
 
 export class POST extends Route<{ filename: string }> {

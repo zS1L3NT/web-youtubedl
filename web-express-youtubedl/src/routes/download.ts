@@ -2,8 +2,8 @@ import ffmpeg from "fluent-ffmpeg"
 import ytdl from "ytdl-core"
 import { type } from "arktype"
 
-import logger from "../logger"
-import { Route } from "../setup"
+import logger from "../logger.js"
+import { Route } from "../setup.js"
 
 export class GET extends Route<
 	any,

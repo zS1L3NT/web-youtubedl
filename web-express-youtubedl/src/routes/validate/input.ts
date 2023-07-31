@@ -4,8 +4,8 @@ import ytdl from "ytdl-core"
 import ytpl from "ytpl"
 import { type } from "arktype"
 
-import { Route } from "../../setup"
-import ytmusic from "../../ytmusic"
+import { Route } from "../../setup.js"
+import ytmusic from "../../ytmusic.js"
 
 export class POST extends Route<{ text: string }> {
 	override bodyValidator = type({ text: "string" })

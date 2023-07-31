@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { Type } from "arktype"
 
-import logger from "./logger"
+import logger from "./logger.js"
 
 const queue: number[] = []
 
