@@ -69,19 +69,19 @@ const DownloadModal = ({
 					{form.values.format === "audioonly" && (
 						<>
 							<TextInput
-								label="Title"
+								label="Title (optional)"
 								description="The title of the song"
 								{...form.getInputProps("song.title")}
 							/>
 
 							<TextInput
-								label="Artist(s)"
+								label="Artist(s) (optional)"
 								description="The artist(s) of the song"
 								{...form.getInputProps("song.artists")}
 							/>
 
 							<TextInput
-								label="Album"
+								label="Album (optional)"
 								description="The album of the song"
 								{...form.getInputProps("song.album")}
 							/>
