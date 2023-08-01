@@ -7,8 +7,10 @@ import ytpl from "ytpl"
 import { Route } from "../../setup.js"
 import ytmusic from "../../ytmusic.js"
 
-export class POST extends Route<{ text: string }> {
-	override bodyValidator = type({ text: "string" })
+const bodyType = type({ text: "string" })
+
+export class POST extends Route<typeof bodyType.infer> {
+	override bodyValidator = bodyType
 
 	override async handle() {
 		const [[videoErr, videoInfo], [playlistErr, playlistInfo]] = await Promise.all([
@@ -59,6 +61,7 @@ export class POST extends Route<{ text: string }> {
 		return ytmusic.getSong(videoId).then(song => ({
 			title: song.name,
 			artists: song.artists.map(artist => artist.name).join(", "),
+			album: "",
 			thumbnail: song.thumbnails.at(-1)?.url || "",
 		}))
 	}

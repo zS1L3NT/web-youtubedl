@@ -7,7 +7,7 @@ const queue: number[] = []
 
 export type iRoute = new (req: Request, res: Response) => Route
 
-export abstract class Route<BV = any, QV = any> {
+export abstract class Route<BV = never, QV = never> {
 	constructor(
 		protected readonly req: Request,
 		protected readonly res: Response,
@@ -72,7 +72,7 @@ export abstract class Route<BV = any, QV = any> {
 	}
 
 	get query(): QV {
-		return this.req.query as unknown as QV
+		return this.req.query as QV
 	}
 
 	get params() {

@@ -22,26 +22,24 @@ const DownloadModal = ({
 	const form = useForm({
 		initialValues: {
 			filename: "",
-			format: "audioonly",
+			format: "audioonly" as "audioonly" | "videoandaudio",
+			song: video.song,
 		},
 		validate: {
-			filename: value => (value ? null : "Filename cannot be empty"),
+			filename: (value, { format }) =>
+				format === "audioonly" || value ? null : "Filename cannot be empty",
 		},
 	})
 
-	const onSubmit = form.onSubmit(({ filename, format }) => {
+	const onSubmit = form.onSubmit(values => {
 		axios
-			.post(`/api/validate/filename`, { filename })
-			.then(() => {
-				const url = new URL(
-					`${
-						import.meta.env.DEV ? "http://localhost:8080" : window.location.origin
-					}/api/download`,
-				)
-				url.searchParams.set("url", `https://youtu.be/${video.id}`)
-				url.searchParams.set("format", format)
-				url.searchParams.set("name", filename)
-				window.open(url.href)
+			.post<string>(`/api/validate/filename`, {
+				uuid: video.uuid,
+				videoId: video.id,
+				...values,
+			})
+			.then(({ data: url }) => {
+				window.open(url)
 				setOpen(false)
 				setVideos(videos => videos.filter(v => v.uuid !== video.uuid))
 			})
@@ -59,6 +57,8 @@ const DownloadModal = ({
 					<Select
 						sx={{ mt: 1 }}
 						label="Type"
+						description="The type of file you want to download"
+						dropdownPosition="bottom"
 						data={[
 							{ value: "audioonly", label: "Audio (MP3)" },
 							{ value: "videoandaudio", label: "Video (MP4)" },
@@ -66,23 +66,45 @@ const DownloadModal = ({
 						{...form.getInputProps("format")}
 					/>
 
-					<TextInput
-						autoFocus
-						label="Filename"
-						rightSectionWidth={60}
-						rightSection={
-							<Text>{form.values.format === "audioonly" ? ".mp3" : ".mp4"}</Text>
-						}
-						{...form.getInputProps("filename")}
-					/>
+					{form.values.format === "audioonly" && (
+						<>
+							<TextInput
+								label="Title"
+								description="The title of the song"
+								{...form.getInputProps("song.title")}
+							/>
+
+							<TextInput
+								label="Artist(s)"
+								description="The artist(s) of the song"
+								{...form.getInputProps("song.artists")}
+							/>
+
+							<TextInput
+								label="Album"
+								description="The album of the song"
+								{...form.getInputProps("song.album")}
+							/>
+						</>
+					)}
+
+					{form.values.format === "videoandaudio" && (
+						<TextInput
+							autoFocus
+							label="Filename"
+							description="The filename of the video"
+							rightSectionWidth={60}
+							rightSection={<Text>.mp4</Text>}
+							{...form.getInputProps("filename")}
+						/>
+					)}
 
 					{error && (
 						<Alert
 							icon={<IconAlertCircle size="1rem" />}
-							title="Bummer!"
+							title="Error"
 							color="red">
-							Something terrible happened! You made a mistake and there is no going
-							back, your data was lost forever!
+							{error}
 						</Alert>
 					)}
 

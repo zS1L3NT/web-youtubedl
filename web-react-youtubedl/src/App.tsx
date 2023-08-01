@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useContext, useState } from "react"
 
-import { Button, Grid, Stack, TextInput } from "@mantine/core"
+import { Button, Container, Grid, Stack, TextInput } from "@mantine/core"
 
 import ErrorDialog from "./components/Popups/ErrorDialog"
 import VideoGridItem from "./components/VideoGridItem"
@@ -34,7 +34,7 @@ const App = () => {
 	}
 
 	return (
-		<>
+		<Container>
 			<Stack
 				my="md"
 				px="md">
@@ -64,7 +64,7 @@ const App = () => {
 				</Grid>
 			</Stack>
 			<ErrorDialog />
-		</>
+		</Container>
 	)
 }
 
