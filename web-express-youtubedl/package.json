@@ -1,11 +1,11 @@
 {
 	"name": "web-express-youtubedl",
 	"description": "Express Server for YouTubeDL",
-	"main": "dist/app.js",
+	"main": "dist/app.mjs",
 	"author": "zS1L3NT <zechariahtan144@gmail.com> (https://www.zectan.com)",
 	"type": "module",
 	"scripts": {
-		"start": "node dist/app.js",
+		"start": "node dist/app.mjs",
 		"dev": "node --loader ts-node/esm --watch --no-warnings src/app.mts",
 		"build": "tsc",
 		"lint": "eslint src",
