@@ -3,6 +3,7 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 
 import { AppShell, Header, MantineProvider, Title } from "@mantine/core"
+import { Notifications } from "@mantine/notifications"
 
 import App from "./App"
 import ContextProviders from "./contexts/ContextProviders"
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
 			withNormalizeCSS
 			withGlobalStyles
 			theme={{ primaryColor: "red" }}>
+			<Notifications />
 			<ContextProviders>
 				<AppShell
 					header={

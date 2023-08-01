@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import { Button, Container, Grid, Stack, TextInput } from "@mantine/core"
 
 import ErrorDialog from "./components/Popups/ErrorDialog"
+import PWANotification from "./components/Popups/PWANotification"
 import VideoGridItem from "./components/VideoGridItem"
 import ErrorDialogContext from "./contexts/ErrorDialogContext"
 import ResultsContext from "./contexts/VideosContext"
@@ -64,6 +65,7 @@ const App = () => {
 				</Grid>
 			</Stack>
 			<ErrorDialog />
+			<PWANotification />
 		</Container>
 	)
 }
