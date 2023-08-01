@@ -5,10 +5,12 @@ import ffmpeg from "fluent-ffmpeg"
 import fs from "fs"
 import path from "path"
 
-import { iRoute } from "./setup"
+import ffmpegInstaller from "@ffmpeg-installer/ffmpeg"
+
+import { iRoute } from "./setup.js"
 
 dotenv.config()
-ffmpeg.setFfmpegPath(require("@ffmpeg-installer/ffmpeg").path)
+ffmpeg.setFfmpegPath(ffmpegInstaller.path)
 
 const PORT = process.env.PORT || 8080
 const app = express()
@@ -18,10 +20,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 app.use(express.json())
-app.use(express.static(path.join(__dirname, "../../web-react-youtubedl/dist")))
+app.use(express.static(path.join(import.meta.url.slice(5), "../../../web-react-youtubedl/dist")))
 
-const readRouteFolder = (folderName: string) => {
-	const folderPath = path.join(__dirname, "routes", folderName)
+const readRouteFolder = async (folderName: string) => {
+	const folderPath = path.join(import.meta.url.slice(5), "../routes", folderName)
 
 	for (const entityName of fs.readdirSync(folderPath)) {
 		const [fileName, extensionName] = entityName.split(".")
@@ -29,11 +31,11 @@ const readRouteFolder = (folderName: string) => {
 
 		if (extensionName) {
 			// Entity is a file
-			const file = require(path.join(folderPath, entityName)) as Record<string, iRoute>
+			const file = (await import(path.join(folderPath, entityName))) as Record<string, iRoute>
 			for (const [method, Route] of Object.entries(file)) {
 				app[method.toLowerCase() as "get" | "post" | "put" | "delete"](
 					"/api" + pathName.replace(/\[(\w+)\]/g, ":$1"),
-					(req, res) => new Route(req, res).setup()
+					(req, res) => new Route(req, res).setup(),
 				)
 			}
 		} else {

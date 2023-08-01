@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { PropsWithChildren, useState } from "react"
 
 import ErrorDialogContext from "./ErrorDialogContext"
 import ResultsContext from "./VideosContext"
 
-const ContextProviders = (props: React.PropsWithChildren<{}>) => {
+const ContextProviders = ({ children }: PropsWithChildren) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [text, setText] = useState("")
 	const [videos, setVideos] = useState<iVideo[]>([])
@@ -14,10 +14,10 @@ const ContextProviders = (props: React.PropsWithChildren<{}>) => {
 				isOpen,
 				text,
 				setIsOpen,
-				setMessage: setText
+				setMessage: setText,
 			}}>
 			<ResultsContext.Provider value={{ videos, setVideos }}>
-				{props.children}
+				{children}
 			</ResultsContext.Provider>
 		</ErrorDialogContext.Provider>
 	)

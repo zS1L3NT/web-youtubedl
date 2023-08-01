@@ -13,7 +13,7 @@ export default Tracer.colorConsole({
 		debug: colors.blue,
 		info: colors.green,
 		warn: colors.yellow,
-		error: [colors.red, colors.bold]
+		error: [colors.red, colors.bold],
 	},
 	preprocess: data => {
 		data.path = data.path
@@ -21,5 +21,5 @@ export default Tracer.colorConsole({
 			.split("web-youtubedl")
 			.at(-1)!
 			.replace(/\/web-express-youtubedl\/(src|dist)/, "src")
-	}
+	},
 })

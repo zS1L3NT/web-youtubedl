@@ -1,15 +1,17 @@
+import { Type } from "arktype"
 import { NextFunction, Request, Response } from "express"
-import { validate } from "validate-any"
-import Validator from "validate-any/dist/classes/Validator"
 
-import logger from "./logger"
+import logger from "./logger.js"
 
 const queue: number[] = []
 
 export type iRoute = new (req: Request, res: Response) => Route
 
-export abstract class Route<BV = any, QV = any> {
-	constructor(protected readonly req: Request, protected readonly res: Response) {}
+export abstract class Route<BV = never, QV = never> {
+	constructor(
+		protected readonly req: Request,
+		protected readonly res: Response,
+	) {}
 
 	setup() {
 		queue.push(queue.length === 0 ? 1 : queue.at(-1)! + 1)
@@ -18,22 +20,22 @@ export abstract class Route<BV = any, QV = any> {
 		logger.http(`Opening ${rid}`, this.req.method, this.req.url, this.req.body)
 
 		if (this.bodyValidator) {
-			const { success, errors } = validate(this.req.body, this.bodyValidator)
-			if (!success) {
+			const result = this.bodyValidator(this.req.body)
+			if (result.problems) {
 				this.res.status(400).send({
 					message: "Body Validation Errors",
-					errors
+					errors: result.problems,
 				})
 				return
 			}
 		}
 
 		if (this.queryValidator) {
-			const { success, errors } = validate(this.req.query, this.queryValidator)
-			if (!success) {
+			const result = this.queryValidator(this.req.query)
+			if (result.problems) {
 				this.res.status(400).send({
 					message: "Body Validation Errors",
-					errors
+					errors: result.problems,
 				})
 				return
 			}
@@ -57,9 +59,9 @@ export abstract class Route<BV = any, QV = any> {
 			})
 	}
 
-	bodyValidator: Validator<BV> | undefined
+	bodyValidator: Type<BV> | undefined
 
-	queryValidator: Validator<QV> | undefined
+	queryValidator: Type<QV> | undefined
 
 	middleware: iMiddleware[] = []
 
@@ -70,7 +72,7 @@ export abstract class Route<BV = any, QV = any> {
 	}
 
 	get query(): QV {
-		return this.req.query as unknown as QV
+		return this.req.query as QV
 	}
 
 	get params() {
@@ -93,23 +95,26 @@ export abstract class Route<BV = any, QV = any> {
 export type iMiddleware = new (req: Request, res: Response) => Middleware
 
 export abstract class Middleware {
-	constructor(protected readonly req: Request, protected readonly res: Response) {}
+	constructor(
+		protected readonly req: Request,
+		protected readonly res: Response,
+	) {}
 
 	abstract handle(next: NextFunction): Promise<void>
 
 	respond(data: any, status = 200) {
 		this.res.send({
 			data,
-			status
+			status,
 		})
 	}
 
 	throw(message: string, status = 400) {
 		this.res.send({
 			data: {
-				message
+				message,
 			},
-			status
+			status,
 		})
 	}
 
