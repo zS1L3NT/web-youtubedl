@@ -13,8 +13,6 @@
 		"clean": "tsc --noEmit && eslint src --fix && prettier src --write && rm tsconfig.tsbuildinfo"
 	},
 	"dependencies": {
-		"@emotion/react": "^11.10.5",
-		"@emotion/styled": "^11.10.5",
 		"@mantine/core": "^6.0.17",
 		"@mantine/form": "^6.0.17",
 		"@mantine/hooks": "^6.0.17",
@@ -31,7 +29,6 @@
 		"@typescript-eslint/parser": "latest",
 		"@vitejs/plugin-react": "^2.2.0",
 		"eslint": "latest",
-		"eslint-config-next": "latest",
 		"eslint-config-prettier": "latest",
 		"eslint-plugin-react": "latest",
 		"eslint-plugin-simple-import-sort": "latest",
