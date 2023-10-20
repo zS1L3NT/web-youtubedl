@@ -4,7 +4,7 @@
 		"target": "esnext",
 		"lib": ["esnext"], // "dom", "dom.iterable", "esnext"
 		"module": "esnext", // commonjs
-		"moduleResolution": "nodenext",
+		"moduleResolution": "node",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 

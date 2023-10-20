@@ -1,8 +1,8 @@
 {
 	"scripts": {
-		"start": "cd web-express-youtubedl && pnpm start",
-		"dev": "pnpx concurrently \"cd web-express-youtubedl && pnpm dev\" \"cd web-react-youtubedl && pnpm dev\"",
-		"build": "cd web-express-youtubedl && pnpm build && cd ../web-react-youtubedl && pnpm build",
-		"clean": "cd web-express-youtubedl && pnpm clean && cd ../web-react-youtubedl && pnpm clean"
+		"start": "cd web-express-youtubedl && bun start",
+		"dev": "bunx concurrently \"cd web-express-youtubedl && bun start\" \"cd web-react-youtubedl && bun dev\"",
+		"build": "cd web-express-youtubedl && bun run build && cd ../web-react-youtubedl && bun run build",
+		"clean": "cd web-express-youtubedl && bun clean && cd ../web-react-youtubedl && bun clean"
 	}
 }

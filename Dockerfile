@@ -1,14 +1,15 @@
-FROM node:16
+FROM node:18
 
 WORKDIR /home/web-youtubedl
 
 COPY . .
 
-RUN npm i -g pnpm
-RUN cd web-express-youtubedl && pnpm i
-RUN cd web-express-youtubedl && pnpm build
-RUN cd web-react-youtubedl && pnpm i
-RUN cd web-react-youtubedl && pnpm build
+RUN npm i -g bun
+RUN cd web-express-youtubedl && bun i
+RUN cd web-react-youtubedl && bun i
+RUN cd web-react-youtubedl && npm run build
 
-EXPOSE 8080
-CMD ["pnpm", "start"]
+ENV PORT=80
+
+EXPOSE 80
+CMD bun start

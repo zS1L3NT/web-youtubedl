@@ -5,14 +5,8 @@
 	"author": "zS1L3NT <zechariahtan144@gmail.com> (https://www.zectan.com)",
 	"type": "module",
 	"scripts": {
-		"start": "node dist/app.mjs",
-		"dev": "node --loader ts-node/esm --watch --no-warnings src/app.mts",
-		"build": "tsc",
-		"lint": "eslint src",
-		"lint:fix": "eslint src --fix",
-		"prettier": "prettier src --check",
-		"prettier:fix": "prettier src --write",
-		"clean": "tsc --noEmit && eslint src --fix && prettier src --write"
+		"start": "bun src/app.ts",
+		"lint": "tsc --noEmit && eslint src --fix && prettier src --write"
 	},
 	"dependencies": {
 		"@ffmpeg-installer/ffmpeg": "^1.1.0",
@@ -27,7 +21,7 @@
 		"tracer": "^1.1.6",
 		"uuid": "^9.0.0",
 		"ytdl-core": "^4.11.5",
-		"ytmusic-api": "^4.2.0",
+		"ytmusic-api": "4.4.0",
 		"ytpl": "^2.3.0"
 	},
 	"devDependencies": {
