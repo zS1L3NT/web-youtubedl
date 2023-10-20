@@ -39,7 +39,7 @@ const DownloadModal = ({
 				...values,
 			})
 			.then(({ data: url }) => {
-				window.open(url)
+				window.open("http://" + location.host + url)
 				setOpen(false)
 				setVideos(videos => videos.filter(v => v.uuid !== video.uuid))
 			})

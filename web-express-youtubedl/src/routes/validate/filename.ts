@@ -33,8 +33,7 @@ export class POST extends Route<typeof bodyType.infer> {
 			}
 
 			const url = new URL("http://www.example.com")
-			url.host =
-				process.env.NODE_ENV === "production" ? "youtubedl.zectan.com" : "localhost:8080"
+			url.host = "localhost"
 			url.pathname = "/api/download"
 			url.searchParams.set("uuid", this.body.uuid)
 			url.searchParams.set("videoId", this.body.videoId)
@@ -46,7 +45,7 @@ export class POST extends Route<typeof bodyType.infer> {
 				url.searchParams.set("song.album", this.body.song.album)
 				url.searchParams.set("song.thumbnail", this.body.song.thumbnail)
 			}
-			this.res.status(200).send(url.href)
+			this.res.status(200).send(url.pathname + url.search)
 		}
 	}
 }
